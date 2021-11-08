@@ -87,6 +87,10 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - commitlint/lint:
+          filters:
+            branches:
+              ignore:
+                - master
           target-branch: master
       - flake8
       - coverage

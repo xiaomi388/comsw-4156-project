@@ -14,6 +14,7 @@ def init_db():
 			name VARCHAR(20) NOT NULL,
 			zipcode INTEGER,
 			rating DOUBLE DEFAULT 0,
+			transcation_count INTEGER NOT NULL,
 			phone_number VARCHAR(10)
 		);"""
 		create_furniture_query = """CREATE TABLE IF NOT EXISTS Furniture (

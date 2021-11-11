@@ -68,6 +68,7 @@ jobs:
       - run:
           name: Setup testing environment
           command: |
+            pip install -r requirements.txt
             pip install coverage
       - run:
           name: Run Tests

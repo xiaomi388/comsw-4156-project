@@ -8,7 +8,7 @@ def init_db():
     try:
         conn = sqlite3.connect('sqlite_db')
         create_user_query = """CREATE TABLE IF NOT EXISTS User (
-            email TEXT PRIMARY KEY,
+            email VARCHAR(20) NOT NULL PRIMARY KEY,
             password TEXT NOT NULL,
             name VARCHAR(20) NOT NULL,
             zipcode INTEGER,
@@ -56,8 +56,25 @@ def clear():
         conn = sqlite3.connect('sqlite_db')
         conn.execute("DROP User")
         conn.execute("DROP Furniture")
-        conn.execute("DROP Transaction")
+        conn.execute("DROP Transactions")
         print('Database Cleared, dropped User, Furniture, Transaction Tables')
+    except Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
+
+
+def populate_testing_data():
+    """Populate testing data in 3 tables."""
+    conn = None
+    try:
+        conn = sqlite3.connect('sqlite_db')
+        conn.execute("INSERT INTO User VALUES(?,?,?,?,?,?,?);",
+                     ("Bob@gmail.com", "hashedpassword", "Bob", 
+                     10025, 4.5, 2, "7348829897"))
+        # conn.execute("INSERT INTO Furniture(owner, title, labels, status, image_url, description)" VALUES(?,?,?,?,?,?);", ("Bob@gmail.com", "Alienware Gaming Monitors", "monitor", "init", "www.googlecom", "This is a monitor"))
+        conn.commit()
     except Error as e:
         print(e)
     finally:

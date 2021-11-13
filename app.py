@@ -1,6 +1,7 @@
 from flask import Flask, request
 import furniture
 import search
+import user
 
 app = Flask(__name__)
 
@@ -15,6 +16,11 @@ def search_furniture():
     keyword = request.args.get('keyword')
     res = search.search_furniture(keyword)
     return res
+
+
+@app.route("/register", methods=["POST"])
+def user_register():
+    return user.register(request.form)
 
 
 if __name__ == '__main__':

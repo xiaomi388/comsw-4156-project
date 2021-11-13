@@ -41,4 +41,5 @@ def register(raw_form):
         finally:
             if conn:
                 conn.close()
-    return jsonify(form.errors), 400
+    return json.dumps({"error": ""}), 201
+    #jsonify(form.errors), 400

@@ -1,6 +1,7 @@
 from flask import Flask, request
 import furniture
 import search
+import profile
 
 app = Flask(__name__)
 
@@ -14,6 +15,12 @@ def post_furniture():
 def search_furniture():
     keyword = request.args.get('keyword')
     res = search.search_furniture(keyword)
+    return res
+
+@app.route("/profile", methods=["GET"])
+def get_profile():
+    user_email = request.args.get('email')
+    res = profile.get_profile(user_email)
     return res
 
 

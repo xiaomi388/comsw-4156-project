@@ -49,8 +49,6 @@ def init_db():
 
 def clear():
     """Drop database"""
-    # emmm, comment for dropping tables
-    # assert 0, "ERROR: how dare you?!"
     conn = None
     try:
         conn = sqlite3.connect('sqlite_db')
@@ -73,10 +71,10 @@ def populate_testing_data():
         conn.execute("INSERT INTO User VALUES(?,?,?,?,?,?,?);",
                      ("Bob@gmail.com", "hashedpassword", "Bob",
                       10025, 4.5, 2, "7348829897"))
-        # conn.execute("INSERT INTO Furniture(owner, title, labels, status,
-        # image_url, description)" VALUES(?,?,?,?,?,?);", ("Bob@gmail.com",
-        # "Alienware Gaming Monitors", "monitor", "init", "www.googlecom",
-        # "This is a monitor"))
+        conn.execute("INSERT INTO Furniture(owner, title, labels,",
+                     "status, image_url, description) VALUES(?,?,?,?,?,?);",
+                     ("Bob@gmail.com", "Alienware Gaming Monitors", "monitor",
+                      "init", "www.googlecom", "This is a monitor"))
         conn.commit()
     except Error as e:
         print(e)

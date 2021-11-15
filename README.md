@@ -5,15 +5,30 @@ Course project for comsw4156
 
 Team Name: Alohomora
 
-# API
+## run and test Instructions
 
-## **POST** - /furnitures
+### Run
+
+```python
+flask run
+```
+
+### Test
+
+```
+coverage run -m unittest discover
+coverage html
+```
+
+## API
+
+### **POST** - /furnitures
 
 This API is used by user to post a new furniture on the platform.
 
-### Request
+#### Request
 
-#### Body Parameters
+##### Body Parameters
 
 - **body** should respect the following json schema:
 
@@ -41,9 +56,9 @@ This API is used by user to post a new furniture on the platform.
 }
 ```
 
-### Response
+#### Response
 
-#### Created successfully
+##### Created successfully
 
 - status code: 201
 - output:
@@ -52,7 +67,7 @@ This API is used by user to post a new furniture on the platform.
     {"error": ""}
     ```
 
-#### Input Invalid
+##### Input Invalid
 
 - status code: 400
 - output:
@@ -61,7 +76,7 @@ This API is used by user to post a new furniture on the platform.
     {"error": "input invalid."}
     ```
 
-#### Internal Error
+##### Internal Error
 
 - status code: 500
 - output:

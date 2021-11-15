@@ -22,6 +22,10 @@ class TestFurniture(unittest.TestCase):
                 nonlocal has_commit
                 has_commit = True
 
+            @staticmethod
+            def close():
+                pass
+
         mock.return_value = MockConn
 
         ret, code = furniture.create_furniture({

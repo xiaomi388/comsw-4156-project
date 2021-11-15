@@ -1,7 +1,6 @@
 from flask import Flask, request
 import furniture
 import search
-import userLogin
 import user
 import profile
 
@@ -25,7 +24,7 @@ def search_furniture():
 
 @app.route("/user/login", methods=["GET"])
 def user_login():
-    return userLogin.user_login(request)
+    return user.user_login(request)
 
 
 @app.before_request
@@ -36,7 +35,7 @@ def get_user_email():
         # print("cookie is ", request.cookies.get('user'))
         user_email = request.cookies.get('user')
         if not user_email:
-            return userLogin.need_login_response()
+            return user.need_login_response()
         else:
             print(f"get user cookie {user_email}")
 

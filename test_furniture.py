@@ -32,8 +32,7 @@ class TestFurniture(unittest.TestCase):
             "title": "mocktitle",
             "labels": "mocklabel",
             "image_url": "mockurl",
-            "description": "mockdesc"}
-        , "mockuser")
+            "description": "mockdesc"}, "mockuser")
 
         self.assertEqual(code, 201)
         self.assertEqual(ret, json.dumps({"error": ""}))
@@ -68,8 +67,7 @@ class TestFurniture(unittest.TestCase):
             "title": "mockt",
             "labels": "mocklabel",
             "image_url": "xxx",
-            "description": "sss"}
-        , "mockuser")
+            "description": "sss"}, "mockuser")
 
         self.assertEqual(code, 500)
         self.assertEqual(ret, json.dumps({"error": "db error: mockerr"}))

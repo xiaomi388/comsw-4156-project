@@ -28,7 +28,8 @@ def select_user_by_email(email: str) -> User:
         if len(users) != 1:
             return None
         else:
-            email, password, name, zipcode, rating, transaction_count, phone_number = users[0]
+            email, password, name, zipcode, \
+                rating, transaction_count, phone_number = users[0]
             return User(email, password, name, zipcode,
                         rating, transaction_count, phone_number)
     except Error as e:

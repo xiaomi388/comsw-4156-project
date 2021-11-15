@@ -82,6 +82,7 @@ def populate_testing_data():
         if conn:
             conn.close()
 
+
 def insert_mock_user():
     try:
         mock_user = ("zj2304@columbia.edu", "password",

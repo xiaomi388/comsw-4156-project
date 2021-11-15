@@ -10,6 +10,7 @@ Team Name: Alohomora
 ### Run
 
 ```python
+pip install -r requirements.txt
 flask run
 ```
 

@@ -1,5 +1,4 @@
 import json
-import sqlite3
 from flask import Flask
 import db
 from werkzeug.datastructures import ImmutableMultiDict
@@ -26,7 +25,6 @@ class TestUser(unittest.TestCase):
     def test_register_input_invalid(self):
         db.clear()
         db.init_db()
-        #invalid input, email format, password length, name length
         mock_form = ImmutableMultiDict([
             ('email', '123columbia.edu'),
             ('password', '12345'),
@@ -55,26 +53,25 @@ class TestUser(unittest.TestCase):
         error, code = user.register(mock_form)
         self.assertEqual(code, 500)
 
-
     def test_user_login_happy_path(self):
         app = Flask(__name__)
         with app.app_context():
             email = "zj2304@columbia.edu"
-            password = "passwd"
+            password = "password"
             resp, code = user.user_login(email, password)
             self.assertEqual(resp.data.decode("utf-8"), "{\"error\": \"\"}")
             self.assertEqual(code, 200)
 
     def test_user_login_no_such_email(self):
-        email = "123@columbia.edu"
-        password = "passwd"
+        email = "888@columbia.edu"
+        password = "password"
         resp, code = user.user_login(email, password)
         self.assertEqual(resp, json.dumps({"error": f"No such email {email}"}))
         self.assertEqual(code, 400)
 
     def test_user_login_wrong_password(self):
         email = "zj2304@columbia.edu"
-        password = "123"
+        password = "12345678900"
         resp, code = user.user_login(email, password)
         self.assertEqual(resp,
                          json.dumps({"error": f"wrong password {email}"}))

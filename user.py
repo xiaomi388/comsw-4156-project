@@ -1,4 +1,5 @@
-from wtforms import Form, validators, EmailField, PasswordField, StringField, IntegerField
+from wtforms import Form, validators, \
+    EmailField, PasswordField, StringField, IntegerField
 import json
 import flask
 import sqlite3
@@ -6,26 +7,35 @@ import userDB
 
 
 class UserRegisterForm(Form):
-    email = EmailField('Email', [validators.DataRequired(), validators.Email()])
-    password = PasswordField('Password', [validators.DataRequired(),validators.length(min=8, max=30)])
-    name = StringField('Username', [validators.DataRequired(), validators.length(min=3, max=30)])
-    mobile_phone = StringField('Mobile', [validators.DataRequired(), validators.length(min=10, max=10)])
+    email = EmailField('Email',
+                       [validators.DataRequired(),
+                        validators.Email()])
+    password = PasswordField('Password',
+                             [validators.DataRequired(),
+                              validators.length(min=8, max=30)])
+    name = StringField('Username',
+                       [validators.DataRequired(),
+                        validators.length(min=3, max=30)])
+    mobile_phone = StringField('Mobile',
+                               [validators.DataRequired(),
+                                validators.length(min=10, max=10)])
     zipcode = IntegerField('Zipcode', [validators.DataRequired()])
 
 
 def register(raw_form):
     form = UserRegisterForm(raw_form)
-    #print(raw_form)
     if not form.validate():
         return json.dumps({"Input error": form.errors}), 400
 
-    user = (form.email.data, form.password.data, form.name.data, form.zipcode.data, form.mobile_phone.data)
-    # wirte data to db
+    user = (form.email.data, form.password.data,
+            form.name.data, form.zipcode.data, form.mobile_phone.data)
     conn = None
     try:
         conn = sqlite3.connect("sqlite_db")
         cur = conn.cursor()
-        sql = "INSERT INTO User(email, password, name, zipcode, phone_number) VALUES(?, ?, ?, ?, ?) "
+        sql = "INSERT INTO User" \
+              "(email, password, name, zipcode, phone_number) " \
+              "VALUES(?, ?, ?, ?, ?) "
         cur.execute(sql, user)
         conn.commit()
     except sqlite3.Error as e:
@@ -36,14 +46,12 @@ def register(raw_form):
     return json.dumps({"error": ""}), 201
 
 
-
 def set_user_cookie(email: str, resp):
     resp.set_cookie('user', email)
 
 
 def need_login_response():
     return json.dumps({"error": "Please login first"}), 400
-
 
 
 def user_login(email, password):

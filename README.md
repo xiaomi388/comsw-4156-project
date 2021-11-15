@@ -58,6 +58,36 @@ This API is used by user to post a new furniture on the platform.
 
 #### Response
 
+### **GET** - /furniture?keyword=<userInput>
+
+Search funiture items based on user input(furniture labels)
+
+#### Request
+
+- Example:
+```
+GET /furniture?keyword="monitor"
+```
+
+#### Response
+
+```
+{
+  "furniture": [
+      {
+          "fid": 1,
+          "owner": Bob,
+          "title": "Alienware Gaming Monitors",
+          "labels": "monitor",
+          "status": "init",
+          "image_url": "",
+          "description": "This is a monitor"
+      }
+}
+```
+
+
+
 ##### Created successfully
 
 - status code: 201

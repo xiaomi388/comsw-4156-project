@@ -1,4 +1,3 @@
-import db
 from wtforms import Form, validators, EmailField, PasswordField, StringField, IntegerField
 import json
 import flask
@@ -37,30 +36,31 @@ def register(raw_form):
     return json.dumps({"error": ""}), 201
 
 
+
 def set_user_cookie(email: str, resp):
     resp.set_cookie('user', email)
 
 
 def need_login_response():
-    return json.dumps({"error": f"Please login first"}), 400
+    return json.dumps({"error": "Please login first"}), 400
 
 
-def user_login(req):
-    # integrity check
-    print(req.endpoint)
+
+def user_login(email, password):
     try:
-        email = req.args.get("email")
-        password = req.args.get("password")
         print(email, password)
+        if not email or not password:
+            return json.dumps({"error": "invalid input"}), 400
         saved_user = userDB.select_user_by_email(email)
         print(saved_user)
         if not saved_user:
-            return json.dumps({"error": f"No such email {str(email)}"}), 400
+            return json.dumps({"error": f"No such email {email}"}), 400
         # To Do: md5
         if not password == saved_user.get_password():
-            return json.dumps({"error": f"wrong password {str(email)}"}), 400
+            return json.dumps({"error": f"wrong password {email}"}), 400
         resp = flask.make_response(json.dumps({"error": ""}))
         set_user_cookie(email, resp)
         return resp, 200
-    except:
-        return json.dumps({"error": f"Internal error"}), 500
+    except Exception as e:
+        print(e)
+        return json.dumps({"error": "Internal error"}), 500

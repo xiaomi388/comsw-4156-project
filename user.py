@@ -1,8 +1,7 @@
-from flask import request, jsonify
 import json
 import sqlite3
 from wtforms import Form, validators,EmailField, PasswordField, StringField,FormField, IntegerField
-from wtforms.validators import DataRequired,DataRequired, Email,EqualTo,length
+#from wtforms.validators import DataRequired,DataRequired, Email,EqualTo,length
 
 
 '''class USMobileForm(Form):
@@ -42,4 +41,3 @@ def register(raw_form):
             if conn:
                 conn.close()
     return json.dumps({"error": form.errors}), 201
-    #jsonify(form.errors), 400

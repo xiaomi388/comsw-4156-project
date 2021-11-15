@@ -1,14 +1,10 @@
 import sqlite3
-
 from werkzeug.datastructures import ImmutableMultiDict
-
-import db
-from os import error
 import unittest
-import json
 import user
 
 class TestUser(unittest.TestCase):
+
     def test_register_input_invalid(self):
         #email address format wrong
         mock_form = ImmutableMultiDict([('email', '123columbia.edu'), ('password', '12345'), ('name', 'testtestuser'),

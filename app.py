@@ -4,7 +4,6 @@ import search
 import user
 import profile
 
-
 app = Flask(__name__)
 
 user_email = None
@@ -21,10 +20,11 @@ def search_furniture():
     return res
 
 
-
 @app.route("/user/login", methods=["GET"])
 def user_login():
-    return user.user_login(request)
+    email = request.args.get("email")
+    password = request.args.get("password")
+    return user.user_login(email, password)
 
 
 @app.before_request
@@ -39,16 +39,17 @@ def get_user_email():
         else:
             print(f"get user cookie {user_email}")
 
+
 @app.route("/register", methods=["POST"])
 def user_register():
     return user.register(request.form)
+
 
 @app.route("/profile", methods=["GET"])
 def get_profile():
     user_email = request.args.get('email')
     res = profile.get_profile(user_email)
     return res
-
 
 
 if __name__ == '__main__':

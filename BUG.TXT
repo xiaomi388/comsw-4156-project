@@ -1,0 +1,78 @@
+./user.py:1:1: F401 'flask.request' imported but unused
+./user.py:1:1: F401 'flask.jsonify' imported but unused
+./user.py:4:1: F401 'wtforms.FormField' imported but unused
+./user.py:4:1: F401 'wtforms.IntegerField' imported but unused
+./user.py:4:37: E231 missing whitespace after ','
+./user.py:4:76: E231 missing whitespace after ','
+./user.py:4:80: E501 line too long (99 > 79 characters)
+./user.py:5:1: F811 redefinition of unused 'DataRequired' from line 5
+./user.py:5:1: F401 'wtforms.validators.DataRequired' imported but unused
+./user.py:5:1: F401 'wtforms.validators.Email' imported but unused
+./user.py:5:1: F401 'wtforms.validators.EqualTo' imported but unused
+./user.py:5:1: F401 'wtforms.validators.length' imported but unused
+./user.py:5:44: E231 missing whitespace after ','
+./user.py:5:64: E231 missing whitespace after ','
+./user.py:5:72: E231 missing whitespace after ','
+./user.py:6:1: F401 'jsonschema' imported but unused
+./user.py:7:1: F811 redefinition of unused 'json' from line 2
+./user.py:9:1: F811 redefinition of unused 'sqlite3' from line 3
+./user.py:13:80: E501 line too long (98 > 79 characters)
+./user.py:14:80: E501 line too long (90 > 79 characters)
+./user.py:15:80: E501 line too long (94 > 79 characters)
+./user.py:19:80: E501 line too long (80 > 79 characters)
+./user.py:20:5: E265 block comment should start with '# '
+./user.py:20:80: E501 line too long (110 > 79 characters)
+./user.py:21:5: E265 block comment should start with '# '
+./user.py:23:62: E231 missing whitespace after ','
+./user.py:23:80: E501 line too long (96 > 79 characters)
+./user.py:24:80: E501 line too long (104 > 79 characters)
+./user.py:25:80: E501 line too long (98 > 79 characters)
+./user.py:32:80: E501 line too long (111 > 79 characters)
+./user.py:33:9: E265 block comment should start with '# '
+./user.py:49:5: E265 block comment should start with '# '
+./user.py:51:1: E302 expected 2 blank lines, found 1
+./user.py:51:26: E231 missing whitespace after ':'
+./user.py:54:1: E302 expected 2 blank lines, found 1
+./user.py:55:33: F541 f-string is missing placeholders
+./user.py:57:1: E302 expected 2 blank lines, found 1
+./user.py:74:5: E722 do not use bare 'except'
+./user.py:74:11: E203 whitespace before ':'
+./user.py:75:37: F541 f-string is missing placeholders
+./user.py:76:1: W391 blank line at end of file
+./test_user.py:5:1: F401 'db' imported but unused
+./test_user.py:6:1: F401 'os.error' imported but unused
+./test_user.py:8:1: F401 'json' imported but unused
+./test_user.py:11:1: E302 expected 2 blank lines, found 1
+./test_user.py:13:9: E265 block comment should start with '# '
+./test_user.py:14:80: E501 line too long (118 > 79 characters)
+./test_user.py:15:80: E501 line too long (94 > 79 characters)
+./test_user.py:16:9: F811 redefinition of unused 'error' from line 6
+./test_user.py:23:80: E501 line too long (96 > 79 characters)
+./test_user.py:24:80: E501 line too long (104 > 79 characters)
+./test_user.py:26:80: E501 line too long (123 > 79 characters)
+./test_user.py:27:33: E128 continuation line under-indented for visual indent
+./test_user.py:27:80: E501 line too long (86 > 79 characters)
+./test_user.py:32:13: F811 redefinition of unused 'error' from line 6
+./test_user.py:32:18: E231 missing whitespace after ','
+./test_user.py:42:1: W391 blank line at end of file
+./test_furniture.py:35:39: E203 whitespace before ','
+./test_furniture.py:36:9: E122 continuation line missing indentation or outdented
+./test_furniture.py:71:34: E203 whitespace before ','
+./test_furniture.py:72:9: E122 continuation line missing indentation or outdented
+./userDB.py:6:80: E501 line too long (96 > 79 characters)
+./userDB.py:30:80: E501 line too long (94 > 79 characters)
+./userDB.py:31:80: E501 line too long (96 > 79 characters)
+./userTableDDL.py:4:1: E302 expected 2 blank lines, found 1
+./userTableDDL.py:10:1: W191 indentation contains tabs
+./userTableDDL.py:10:1: E101 indentation contains mixed spaces and tabs
+./userTableDDL.py:11:4: W191 indentation contains tabs
+./userTableDDL.py:11:4: E101 indentation contains mixed spaces and tabs
+./userTableDDL.py:12:1: W191 indentation contains tabs
+./userTableDDL.py:12:1: E101 indentation contains mixed spaces and tabs
+./userTableDDL.py:13:1: W191 indentation contains tabs
+./userTableDDL.py:13:1: E101 indentation contains mixed spaces and tabs
+./userTableDDL.py:28:80: E501 line too long (103 > 79 characters)
+./userTableDDL.py:32:80: E501 line too long (88 > 79 characters)
+./userTableDDL.py:50:15: F541 f-string is missing placeholders
+./userTableDDL.py:57:1: E302 expected 2 blank lines, found 1
+./userTableDDL.py:70:1: E305 expected 2 blank lines after class or function definition, found 1

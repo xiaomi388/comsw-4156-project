@@ -26,7 +26,7 @@ class TestProfile(unittest.TestCase):
             mock_data_sql = 'INSERT OR IGNORE INTO USER ' +\
                             '(email, password, name, ' +\
                             'zipcode, rating, \
-                            transcation_count, phone_number) ' +\
+                            transaction_count, phone_number) ' +\
                             'VALUES (\'test0@email.com\', \'123\', \'rick\', \
                                 100000, 5, 1, \'123123\');'
             print(mock_data_sql)

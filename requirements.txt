@@ -2,3 +2,4 @@ flask
 jsonschema
 wtforms
 werkzeug
+email_validator

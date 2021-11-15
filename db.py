@@ -71,9 +71,12 @@ def populate_testing_data():
     try:
         conn = sqlite3.connect('sqlite_db')
         conn.execute("INSERT INTO User VALUES(?,?,?,?,?,?,?);",
-                     ("Bob@gmail.com", "hashedpassword", "Bob", 
-                     10025, 4.5, 2, "7348829897"))
-        # conn.execute("INSERT INTO Furniture(owner, title, labels, status, image_url, description)" VALUES(?,?,?,?,?,?);", ("Bob@gmail.com", "Alienware Gaming Monitors", "monitor", "init", "www.googlecom", "This is a monitor"))
+                     ("Bob@gmail.com", "hashedpassword", "Bob",
+                      10025, 4.5, 2, "7348829897"))
+        # conn.execute("INSERT INTO Furniture(owner, title, labels, status,
+        # image_url, description)" VALUES(?,?,?,?,?,?);", ("Bob@gmail.com",
+        # "Alienware Gaming Monitors", "monitor", "init", "www.googlecom",
+        # "This is a monitor"))
         conn.commit()
     except Error as e:
         print(e)

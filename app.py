@@ -17,6 +17,7 @@ def search_furniture():
     res = search.search_furniture(keyword)
     return res
 
+
 @app.route("/profile", methods=["GET"])
 def get_profile():
     user_email = request.args.get('email')

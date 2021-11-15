@@ -100,18 +100,3 @@ def insert_mock_user():
     except Error as e:
         print(e)
     return
-
-
-def check_User_Table():
-    try:
-        conn = sqlite3.connect("sqlite_db")
-        users = conn.execute(
-            "Select * from User "
-        )
-        conn.commit()
-        print("user table has ")
-        for user in users:
-            print(user)
-    except Error as e:
-        print(e)
-    return

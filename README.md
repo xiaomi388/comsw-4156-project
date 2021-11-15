@@ -135,6 +135,8 @@ GET /profile?keyword="test0@email.com"
     {"error": "internal error"}
     ```
 
+### **GET** - /user/login?email=<userEmail>&password=<userPassword>
+
 User login
 
 #### Request

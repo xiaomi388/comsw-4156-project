@@ -33,7 +33,7 @@ class TestFurniture(unittest.TestCase):
             "labels": "mocklabel",
             "image_url": "mockurl",
             "description": "mockdesc"}
-        )
+        , "mockuser")
 
         self.assertEqual(code, 201)
         self.assertEqual(ret, json.dumps({"error": ""}))
@@ -55,7 +55,7 @@ class TestFurniture(unittest.TestCase):
             {"title": "missing some fields"}
         ]
         for test in tests:
-            ret, code = furniture.create_furniture(test)
+            ret, code = furniture.create_furniture(test, "mockuser")
 
             self.assertEqual(ret, json.dumps({"error": "input invalid."}))
             self.assertEqual(code, 400)
@@ -69,7 +69,7 @@ class TestFurniture(unittest.TestCase):
             "labels": "mocklabel",
             "image_url": "xxx",
             "description": "sss"}
-        )
+        , "mockuser")
 
         self.assertEqual(code, 500)
         self.assertEqual(ret, json.dumps({"error": "db error: mockerr"}))

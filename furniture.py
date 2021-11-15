@@ -3,7 +3,7 @@ import json
 import sqlite3
 
 
-def create_furniture(furniture):
+def create_furniture(furniture, owner):
     """ used by user to post a new furniture
 
     :param furniture: a json object representing a furniture
@@ -24,8 +24,7 @@ def create_furniture(furniture):
         jsonschema.validate(instance=furniture, schema=schema)
     except (ValueError, jsonschema.exceptions.ValidationError):
         return json.dumps({"error": "input invalid."}), 400
-    # FIXME: use real user id
-    furniture["owner"] = "mockuser"
+    furniture["owner"] = owner
 
     # write into db
     conn = None

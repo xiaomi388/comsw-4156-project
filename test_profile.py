@@ -6,10 +6,12 @@ import db
 
 
 class TestProfile(unittest.TestCase):
+    @classmethod
     def setUpClass(cls) -> None:
         db.clear()
         db.init_db()
 
+    @classmethod
     def tearDownClass(cls) -> None:
         db.clear()
 

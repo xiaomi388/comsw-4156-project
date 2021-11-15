@@ -9,8 +9,9 @@ Team Name: Alohomora
 
 ### Run
 
-```python
-pip install -r requirements.txt
+```
+python
+pip3 install -r requirements.txt
 flask run
 ```
 
@@ -33,32 +34,56 @@ This API is used for new user registration
 
 ##### Body Parameters
 
-- **body** should respect the following json schema:
+- **body** should follow form-encoded request bodies (x-www-form-urlencoded):
 
-```
-email, password, name, zipcode, phone_number
-{
-    "type": "object",
-    "required": ["email", "labels", "image_url", "description"],
-    "properties": {
-        "title": {"type": "string"},
-        "labels": {"type": "string"},
-        "image_url": {"type": "string"},
-        "description": {"type": "string"},
-    }
-}
-```
 
 - Example:
 
 ```
-{
-  "title": "iPhone 12",
-  "labels": "like new, phone",
-  "image_url": "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fiphone&psig=AOvVaw0_LC7YH4CTStenQE3A95aw&ust=1637075168411000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNi2n7HSmvQCFQAAAAAdAAAAABAG",
-  "description": "This is a brand new iphone 12 with box"
-}
+email:781@columbia.edu
+password:123412345
+name:testtestuser
+mobile_phone:8148888477
+zipcode:10026
 ```
+
+##### Registered successfully
+
+- status code: 201
+- output:
+
+    ```
+    {"error": ""}
+    ```
+##### Input Invalid
+
+- status code: 400
+- output:
+
+    ```
+    {"Input error": form.errors}
+    ```
+- example:
+
+    ```
+    {"Input error": {"email": ["Invalid email address."]}}
+    ```
+##### Database Error
+
+- status code: 500
+- output:
+
+    ```
+    {"error": "db error: **"}
+    ```
+- example:
+
+    ```
+    {"error": "db error: UNIQUE constraint failed: User.email"}
+   
+    ```
+    
+#### Response
 
 ### **POST** - /furnitures
 

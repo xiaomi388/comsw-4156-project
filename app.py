@@ -11,7 +11,7 @@ user_email = None
 
 @app.route("/furnitures", methods=["POST"])
 def post_furniture():
-    return furniture.create_furniture(request.get_json())
+    return furniture.create_furniture(request.get_json(), user_email)
 
 
 @app.route("/furniture", methods=["GET"])

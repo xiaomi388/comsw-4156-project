@@ -86,7 +86,27 @@ GET /furniture?keyword="monitor"
 }
 ```
 
+### **GET** - /profile?email=<userEmail>
 
+Get user's profile page
+
+#### Request
+
+- Example:
+
+```
+GET /profile?keyword="test0@email.com"
+```
+
+#### Response
+```
+{
+  "email": "test0@gmail.com",
+  "name": "rick",
+  "zipcode": 100000,
+  "phone_number": 123123
+}
+```
 
 ##### Created successfully
 

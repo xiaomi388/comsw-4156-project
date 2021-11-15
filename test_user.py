@@ -54,6 +54,9 @@ class TestUser(unittest.TestCase):
         self.assertEqual(code, 500)
 
     def test_user_login_happy_path(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
         app = Flask(__name__)
         with app.app_context():
             email = "zj2304@columbia.edu"
@@ -63,6 +66,9 @@ class TestUser(unittest.TestCase):
             self.assertEqual(code, 200)
 
     def test_user_login_no_such_email(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
         email = "888@columbia.edu"
         password = "password"
         resp, code = user.user_login(email, password)
@@ -70,6 +76,9 @@ class TestUser(unittest.TestCase):
         self.assertEqual(code, 400)
 
     def test_user_login_wrong_password(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
         email = "zj2304@columbia.edu"
         password = "12345678900"
         resp, code = user.user_login(email, password)
@@ -78,6 +87,9 @@ class TestUser(unittest.TestCase):
         self.assertEqual(code, 400)
 
     def test_user_login_input_invalid(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
         email = "zj2304@columbia.edu"
         password = None
         resp, code = user.user_login(email, password)

@@ -13,7 +13,7 @@ def init_db():
             name VARCHAR(20) NOT NULL,
             zipcode INTEGER,
             rating DOUBLE DEFAULT 0,
-            transcation_count INTEGER DEFAULT 0,
+            transaction_count INTEGER DEFAULT 0,
             phone_number VARCHAR(10)
         );"""
         create_furniture_query = """CREATE TABLE IF NOT EXISTS Furniture (
@@ -81,3 +81,36 @@ def populate_testing_data():
     finally:
         if conn:
             conn.close()
+
+def insert_mock_user():
+    try:
+        mock_user = ("zj2304@columbia.edu", "password",
+                     "Zhihao Jiang", 10025, 10, 1, "6466466646")
+        conn = sqlite3.connect("sqlite_db")
+        conn.execute(
+            "INSERT INTO User "
+            "(email, password, name, zipcode,"
+            " rating, transaction_count, phone_number) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)", mock_user
+        )
+
+        conn.commit()
+        print(f"mock user inserted {mock_user}")
+    except Error as e:
+        print(e)
+    return
+
+
+def check_User_Table():
+    try:
+        conn = sqlite3.connect("sqlite_db")
+        users = conn.execute(
+            "Select * from User "
+        )
+        conn.commit()
+        print("user table has ")
+        for user in users:
+            print(user)
+    except Error as e:
+        print(e)
+    return

@@ -2,9 +2,17 @@ from os import error
 import unittest
 import profile
 import sqlite3
+import db
 
 
 class TestProfile(unittest.TestCase):
+    def setUpClass(cls) -> None:
+        db.clear()
+        db.init_db()
+
+    def tearDownClass(cls) -> None:
+        db.clear()
+
     def test_get_profile_input_invalid(self):
 
         conn = None
@@ -26,8 +34,9 @@ class TestProfile(unittest.TestCase):
             print('Database Online, a mock user has been inserted.')
 
             test_res = profile.get_profile("test0@email.com")
-            exp_res = '{"profile": {"email": "test0@email.com", "name": "rick", \
-                        "zipcode": 100000, "phone_number": "123123"}}'
+            exp_res = '{"profile": {"email": "test0@email.com", ' +\
+                      '"name": "rick", "zipcode": 100000, ' +\
+                      '"phone_number": "123123"}}'
             self.assertEqual(exp_res, test_res)
 
         except error as e:

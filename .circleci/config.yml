@@ -28,8 +28,8 @@ jobs:
       - run:
           name: run radon
           command: |
-            radon cc -s -nb .
-            result=$(radon cc -s -nb .)
+            radon cc -s -nc .
+            result=$(radon cc -s -nc .)
             if [[ $? != 0 ]]; then
                 echo "Command failed."
                 exit 1

@@ -2,6 +2,9 @@ from flask import Flask, request
 import furniture
 import search
 import userLogin
+import user
+import profile
+
 
 app = Flask(__name__)
 
@@ -17,6 +20,7 @@ def search_furniture():
     keyword = request.args.get('keyword')
     res = search.search_furniture(keyword)
     return res
+
 
 
 @app.route("/user/login", methods=["GET"])
@@ -35,6 +39,17 @@ def get_user_email():
             return userLogin.need_login_response()
         else:
             print(f"get user cookie {user_email}")
+
+@app.route("/register", methods=["POST"])
+def user_register():
+    return user.register(request.form)
+
+@app.route("/profile", methods=["GET"])
+def get_profile():
+    user_email = request.args.get('email')
+    res = profile.get_profile(user_email)
+    return res
+
 
 
 if __name__ == '__main__':

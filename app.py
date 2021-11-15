@@ -29,7 +29,7 @@ def user_login():
 
 @app.before_request
 def get_user_email():
-    if str(request.url_rule) != "/user/login":
+    if str(request.url_rule) not in ["/user/login", "/register"]:
         global user_email
         # print("last email", user_email)
         # print("cookie is ", request.cookies.get('user'))

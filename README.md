@@ -21,6 +21,8 @@ coverage run -m unittest discover
 coverage html
 ```
 
+The flake8 and coverage reports have been stored in the `report` folder.
+
 ## API
 
 ### **POST** - /furnitures
@@ -58,6 +60,35 @@ This API is used by user to post a new furniture on the platform.
 ```
 
 #### Response
+
+##### Created successfully
+
+- status code: 200
+- output:
+
+    ```
+    {"error": ""}
+    ```
+
+##### Input Invalid
+
+- status code: 400
+- output:
+
+    ```
+    {"error": "invalid input"}
+    ```
+    
+
+##### Internal Error
+
+- status code: 500
+- output:
+
+    ```
+    {"error": "Internal error"}
+    ```
+
 
 ### **GET** - /furniture?keyword=<userInput>
 

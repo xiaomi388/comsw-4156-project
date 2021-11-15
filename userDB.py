@@ -3,7 +3,8 @@ from sqlite3 import Error
 
 
 class User:
-    def __init__(self, email, password, name, zipcode, rating, transaction_count, phone_number):
+    def __init__(self, email, password, name
+                 , zipcode, rating, transaction_count, phone_number):
         self.email = email
         self.password = password
         self.name = name
@@ -27,8 +28,10 @@ def select_user_by_email(email: str) -> User:
         if len(users) != 1:
             return None
         else:
-            email, password, name, zipcode, rating, transaction_count, phone_number = users[0]
-            return User(email, password, name, zipcode, rating, transaction_count, phone_number)
+            email, password, name, zipcode, rating, \
+            transaction_count, phone_number = users[0]
+            return User(email, password, name, zipcode,
+                        rating, transaction_count, phone_number)
     except Error as e:
         print(e)
         return None

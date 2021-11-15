@@ -4,7 +4,6 @@ import search
 import user
 import profile
 
-
 app = Flask(__name__)
 
 user_email = None
@@ -24,7 +23,9 @@ def search_furniture():
 
 @app.route("/user/login", methods=["GET"])
 def user_login():
-    return user.user_login(request)
+    email = request.args.get("email")
+    password = request.args.get("password")
+    return user.user_login(email, password)
 
 
 @app.before_request

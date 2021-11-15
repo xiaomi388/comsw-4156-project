@@ -1,8 +1,8 @@
 from flask import request, jsonify
 import json
 import sqlite3
-from wtforms import Form, validators,EmailField, PasswordField, StringField,FormField, IntegerField
-from wtforms.validators import DataRequired,DataRequired, Email,EqualTo,length
+from wtforms import Form, validators, EmailField, PasswordField, StringField, FormField, IntegerField
+from wtforms.validators import DataRequired, DataRequired, Email, EqualTo, length
 import jsonschema
 import json
 import flask
@@ -17,10 +17,10 @@ import userDB
 
 class UserRegisterForm(Form):
     email = EmailField('Email', [validators.DataRequired(), validators.Email()])
-    #password = PasswordField('Password', [DataRequired(), EqualTo('confirm',message='Passwords must match')])
-    #confirm = PasswordField('Confirm Password')
+    # password = PasswordField('Password', [DataRequired(), EqualTo('confirm',message='Passwords must match')])
+    # confirm = PasswordField('Confirm Password')
     password = PasswordField('Password', [validators.DataRequired()])
-    name = StringField('Username', [validators.DataRequired(),validators.length(min=6, max=30)])
+    name = StringField('Username', [validators.DataRequired(), validators.length(min=6, max=30)])
     mobile_phone = StringField('Mobile', [validators.DataRequired(), validators.length(min=10, max=10)])
     zipcode = StringField('Zipcode', [validators.DataRequired(), validators.length(min=5, max=5)])
 
@@ -30,7 +30,7 @@ def register(raw_form):
     print(raw_form)
     if form.validate():
         user = [form.email.data, form.password.data, form.name.data, form.zipcode.data, form.mobile_phone.data]
-        #wirte data to db
+        # wirte data to db
         conn = None
         try:
             conn = sqlite3.connect("sqlite_db")
@@ -46,31 +46,32 @@ def register(raw_form):
             if conn:
                 conn.close()
     return json.dumps({"error": form.errors}), 201
-    #jsonify(form.errors), 400
+    # jsonify(form.errors), 400
 
-def set_user_cookie(email:str, resp):
+
+def set_user_cookie(email: str, resp):
     resp.set_cookie('user', email)
 
-def need_login_response():
-    return json.dumps({"error": f"Please login first"}), 400
 
-def user_login(req):
-    # integrity check
-    print(req.endpoint)
+def need_login_response():
+    return json.dumps({"error": "Please login first"}), 400
+
+
+def user_login(email, password):
     try:
-        email = req.args.get("email")
-        password = req.args.get("password")
         print(email, password)
+        if not email or not password:
+            return json.dumps({"error": "invalid input"}), 400
         saved_user = userDB.select_user_by_email(email)
         print(saved_user)
         if not saved_user:
-            return json.dumps({"error": f"No such email {str(email)}"}), 400
+            return json.dumps({"error": f"No such email {email}"}), 400
         # To Do: md5
         if not password == saved_user.get_password():
-            return json.dumps({"error": f"wrong password {str(email)}"}), 400
+            return json.dumps({"error": f"wrong password {email}"}), 400
         resp = flask.make_response(json.dumps({"error": ""}))
         set_user_cookie(email, resp)
         return resp, 200
-    except :
-        return json.dumps({"error": f"Internal error"}), 500
-
+    except Exception as e:
+        print(e)
+        return json.dumps({"error": "Internal error"}), 500

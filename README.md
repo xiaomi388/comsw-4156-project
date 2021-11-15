@@ -135,6 +135,58 @@ GET /profile?keyword="test0@email.com"
     {"error": "internal error"}
     ```
 
+User login
 
+#### Request
 
+- Example:
+
+```
+GET /user/login?email=aabb@columbia.edu&password=1234
+```
+    
+##### Created successfully
+
+- status code: 200
+- output:
+
+    ```
+    {"error": ""}
+    ```
+
+##### Input Invalid
+
+- status code: 400
+- output:
+
+    ```
+    {"error": "invalid input"}
+    ```
+    
+##### No such user 
+
+- status code: 400
+- output:
+
+    ```
+    {"error": "No such email aabb@columbia.edu"}
+    ```
+    
+##### Wrong password
+
+- status code: 400
+- output:
+
+    ```
+    {"error": "wrong password aabb@columbia.edu"}
+    ```
+
+##### Internal Error
+
+- status code: 500
+- output:
+
+    ```
+    {"error": "Internal error"}
+    ```
 

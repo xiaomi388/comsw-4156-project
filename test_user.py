@@ -1,9 +1,19 @@
 import sqlite3
 from werkzeug.datastructures import ImmutableMultiDict
+import db
 import unittest
 import user
 
 class TestUser(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        db.clear()
+        db.init_db()
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        db.clear()
 
     def test_register_input_invalid(self):
         #email address format wrong

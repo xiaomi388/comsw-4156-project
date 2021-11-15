@@ -39,9 +39,12 @@ def get_user_email():
         else:
             print(f"get user cookie {user_email}")
 
+
+
 @app.route("/register", methods=["POST"])
 def user_register():
     return user.register(request.form)
+
 
 @app.route("/profile", methods=["GET"])
 def get_profile():

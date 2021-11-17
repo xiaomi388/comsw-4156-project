@@ -52,9 +52,9 @@ def clear():
     conn = None
     try:
         conn = sqlite3.connect('sqlite_db')
-        conn.execute("DROP User")
-        conn.execute("DROP Furniture")
-        conn.execute("DROP Transactions")
+        conn.execute("DROP Table User")
+        conn.execute("DROP Table Furniture")
+        conn.execute("DROP Table Transactions")
         print('Database Cleared, dropped User, Furniture, Transaction Tables')
     except Error as e:
         print(e)

@@ -3,7 +3,9 @@ import furniture
 import search
 import user
 import profile
+import db
 
+db.init_db()
 app = Flask(__name__)
 
 user_email = None

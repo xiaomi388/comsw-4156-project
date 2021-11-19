@@ -40,6 +40,8 @@ def init_db():
         conn.execute(create_transaction_query)
         print('Database Online, User, furniture and '
               'transaction tables created')
+        # insert mock user
+        insert_mock_user()
     except Error as e:
         print(e)
     finally:

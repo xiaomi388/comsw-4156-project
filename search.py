@@ -8,12 +8,12 @@ def search_furniture(keyword):
     conn = None
     try:
         conn = sqlite3.connect("sqlite_db")
-        search_label_res = conn.execute("SELECT * FROM \
-                                         Furniture WHERE labels=?",
-                                        [keyword]).fetchall()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM Furniture WHERE labels={}".format(keyword))
+        search_label_res = cur.fetchall()
         conn.commit()
         if len(search_label_res) == 0:
-            return json.dumps({"error": "no matched furniture found"}), 201
+            return json.dumps({"error": "no matched furniture found"}), 200
         furniture_list = []
         for f in search_label_res:
             fid, owner, title, labels, status, image_url, description = f

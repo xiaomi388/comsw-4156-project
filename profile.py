@@ -18,7 +18,7 @@ def get_profile(email):
                 transcation_count, phone_number = p
             profile_info = {"email": email, "name": name, "zipcode": zipcode,
                             "phone_number": phone_number}
-        return json.dumps({"profile": profile_info})
+        return json.dumps({"profile": profile_info}), 200
     except sqlite3.Error as e:
         return json.dumps({"error": f"db error: {str(e)}"}), 500
     finally:

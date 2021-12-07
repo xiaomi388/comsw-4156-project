@@ -19,12 +19,14 @@ def init_db():
         create_furniture_query = """CREATE TABLE IF NOT EXISTS Furniture (
             fid INTEGER PRIMARY KEY AUTOINCREMENT,
             owner VARCHAR(20) NOT NULL,
+            buyer VARCHAR(20),
             title VARCHAR(50),
             labels TEXT,
             status TEXT NOT NULL DEFAULT "init",
             image_url TEXT,
             description VARCHAR(200),
-            FOREIGN KEY(owner) REFERENCES User(email)
+            FOREIGN KEY(owner) REFERENCES User(email),
+            FOREIGN KEY(buyer) REFERENCES User(email)
         );"""
         create_transaction_query = """CREATE TABLE IF NOT EXISTS Transactions (
             tid INTEGER PRIMARY KEY AUTOINCREMENT,

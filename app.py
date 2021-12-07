@@ -55,5 +55,11 @@ def get_profile():
     return res
 
 
+@app.route("/furnitures/<fid>/rate", methods=["POST"])
+def post_rate(fid):
+    rating = request.args.get('rating', type=int)
+    return furniture.rate_owner(fid, user_email, rating)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1')

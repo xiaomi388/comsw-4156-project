@@ -16,8 +16,9 @@ def search_furniture(keyword):
             return json.dumps({"error": "no matched furniture found"}), 201
         furniture_list = []
         for f in search_label_res:
-            fid, owner, title, labels, status, image_url, description = f
-            furniture_list.append({"fid": fid, "owner": owner,
+            fid, owner, buyer, title, \
+                labels, status, image_url, description = f
+            furniture_list.append({"fid": fid, "owner": owner, "buyer": buyer,
                                    "title": title, "labels": labels,
                                    "status": status, "image_url": image_url,
                                    "description": description})

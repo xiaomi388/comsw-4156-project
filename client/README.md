@@ -1,15 +1,25 @@
-###Install
+### Install
 ```
 cd client
 npm install
 ```
 
-###Run
+### Run
 ```
 npm start
 ```
 
-###Endpoint
+### Endpoint
 ```
 localhost:3000
+```
+
+### File Structure
+```
+/client 
+--/src
+------/App.js
+------/registerHandler.js
+------/furnitureHandler.js
+------/profileHandler.js 
 ```

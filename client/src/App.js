@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useCookies } from "react-cookie";
 
+import RegisterHandler from './registerHandler';
 import FurnitureHandler from './furnitureHandler.js';
 import ProfileHandler from './profileHandler.js';
 
@@ -21,9 +22,12 @@ function App() {
       <button onClick={handleCookie}>set cookie</button>
       cookies.user: {cookies.user}
 
+      <RegisterHandler />
+      <br />
 
       <FurnitureHandler />
       <br />
+      
       <ProfileHandler />
 
     </div>

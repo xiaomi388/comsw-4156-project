@@ -19,12 +19,14 @@ def init_db():
         create_furniture_query = """CREATE TABLE IF NOT EXISTS Furniture (
             fid INTEGER PRIMARY KEY AUTOINCREMENT,
             owner VARCHAR(20) NOT NULL,
+            buyer VARCHAR(20),
             title VARCHAR(50),
             labels TEXT,
             status TEXT NOT NULL DEFAULT "init",
             image_url TEXT,
             description VARCHAR(200),
-            FOREIGN KEY(owner) REFERENCES User(email)
+            FOREIGN KEY(owner) REFERENCES User(email),
+            FOREIGN KEY(buyer) REFERENCES User(email)
         );"""
         create_transaction_query = """CREATE TABLE IF NOT EXISTS Transactions (
             tid INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,9 +54,9 @@ def clear():
     conn = None
     try:
         conn = sqlite3.connect('sqlite_db')
-        conn.execute("DROP User")
-        conn.execute("DROP Furniture")
-        conn.execute("DROP Transactions")
+        conn.execute("DROP Table User")
+        conn.execute("DROP Table Furniture")
+        conn.execute("DROP Table Transactions")
         print('Database Cleared, dropped User, Furniture, Transaction Tables')
     except Error as e:
         print(e)
@@ -97,21 +99,6 @@ def insert_mock_user():
 
         conn.commit()
         print(f"mock user inserted {mock_user}")
-    except Error as e:
-        print(e)
-    return
-
-
-def check_User_Table():
-    try:
-        conn = sqlite3.connect("sqlite_db")
-        users = conn.execute(
-            "Select * from User "
-        )
-        conn.commit()
-        print("user table has ")
-        for user in users:
-            print(user)
     except Error as e:
         print(e)
     return

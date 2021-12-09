@@ -3,7 +3,9 @@ import furniture
 import search
 import user
 import profile
+import db
 
+db.init_db()
 app = Flask(__name__)
 
 user_email = None
@@ -51,6 +53,12 @@ def get_profile():
     # user_email = request.args.get('email')
     res = profile.get_profile(user_email)
     return res
+
+
+@app.route("/furnitures/<fid>/rate", methods=["POST"])
+def post_rate(fid):
+    rating = request.args.get('rating', type=int)
+    return furniture.rate_owner(fid, user_email, rating)
 
 
 if __name__ == '__main__':

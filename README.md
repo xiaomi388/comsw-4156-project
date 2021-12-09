@@ -9,7 +9,9 @@ Team Name: Alohomora
 
 ### Run
 
-```python
+```
+python
+pip3 install -r requirements.txt
 flask run
 ```
 
@@ -20,7 +22,68 @@ coverage run -m unittest discover
 coverage html
 ```
 
+The flake8 and coverage reports have been stored in the `report` folder.
+
 ## API
+
+### **POST** - /register
+
+This API is used for new user registration
+
+#### Request
+
+##### Body Parameters
+
+- **body** should follow form-encoded request bodies (x-www-form-urlencoded):
+
+
+- Example:
+
+```
+email:781@columbia.edu
+password:123412345
+name:testtestuser
+mobile_phone:8148888477
+zipcode:10026
+```
+
+##### Registered successfully
+
+- status code: 201
+- output:
+
+    ```
+    {"error": ""}
+    ```
+##### Input Invalid
+
+- status code: 400
+- output:
+
+    ```
+    {"Input error": form.errors}
+    ```
+- example:
+
+    ```
+    {"Input error": {"email": ["Invalid email address."]}}
+    ```
+##### Database Error
+
+- status code: 500
+- output:
+
+    ```
+    {"error": "db error: **"}
+    ```
+- example:
+
+    ```
+    {"error": "db error: UNIQUE constraint failed: User.email"}
+   
+    ```
+    
+#### Response
 
 ### **POST** - /furnitures
 
@@ -57,6 +120,35 @@ This API is used by user to post a new furniture on the platform.
 ```
 
 #### Response
+
+##### Created successfully
+
+- status code: 200
+- output:
+
+    ```
+    {"error": ""}
+    ```
+
+##### Input Invalid
+
+- status code: 400
+- output:
+
+    ```
+    {"error": "invalid input"}
+    ```
+    
+
+##### Internal Error
+
+- status code: 500
+- output:
+
+    ```
+    {"error": "Internal error"}
+    ```
+
 
 ### **GET** - /furniture?keyword=<userInput>
 

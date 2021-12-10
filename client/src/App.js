@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import RegisterHandler from './registerHandler';
 import FurnitureHandler from './furnitureHandler.js';
 import ProfileHandler from './profileHandler.js';
+import LoginHandler from './loginHandler.js';
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
       cookies.user: {cookies.user}
 
       <RegisterHandler />
+      <br />
+
+      <LoginHandler />
       <br />
 
       <FurnitureHandler />

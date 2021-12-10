@@ -43,12 +43,10 @@ def user_login():
 def load_user(user_id):
     return user.UserLoginObj.get(user_id)
 
-
 @login_manager.unauthorized_handler
 def unauthorized():
     # do stuff
     return user.need_login_response()
-
 
 @app.route('/user/logout', methods=["GET"])
 @login_required
@@ -76,11 +74,11 @@ def post_rate(fid):
     rating = request.args.get('rating', type=int)
     return furniture.rate_owner(fid, current_user.get_email(), rating)
 
-
 @app.route("/furnitures/<fid>/buy", methods=["POST"])
 @login_required
 def buy_furniture(fid):
     return furniture.buy_furniture(fid, current_user.get_email())
+
 
 
 if __name__ == '__main__':

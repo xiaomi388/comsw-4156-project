@@ -284,3 +284,51 @@ GET /user/login?email=aabb@columbia.edu&password=1234
     {"error": "Internal error"}
     ```
 
+### **POST** - /furnitures/\<fid\>/rate?rating=\<rating\>
+
+Used by a buyer to rate the owner of a furniture with the id of <fid> after the transaction is completed. The rating
+score is specified by \<rating\>.
+
+\<rating\> should be between an integer between 0 and 5.
+
+#### Request
+
+- Example:
+```
+POST /furnitures/f123/rate?rating=5
+```
+
+#### Response
+
+##### On Success:
+
+- status code: 200
+- output:
+
+```
+{
+  "error": ""
+}
+```
+
+##### Input Invalid or Other Client Errors:
+
+- status: 400
+- output:
+
+```
+{
+  "error": "<specific reason>"
+}
+```
+
+##### Internal Error:
+
+- status: 500
+- output:
+
+```
+{
+  "error": "<specific reason>"
+}
+```

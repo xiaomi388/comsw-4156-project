@@ -284,7 +284,7 @@ GET /user/login?email=aabb@columbia.edu&password=1234
     {"error": "Internal error"}
     ```
 
-### **POST** - /furnitures/<fid>/rate?rating=<rating>
+### **POST** - /furnitures/\<fid\>/rate?rating=\<rating\>
 
 Used by a buyer to rate the owner of a furniture with the id of <fid> after the transaction is completed. The rating
 score is specified by \<rating\>.
@@ -300,7 +300,7 @@ POST /furnitures/f123/rate?rating=5
 
 #### Response
 
-On Success:
+##### On Success:
 
 - status code: 200
 - output:
@@ -311,7 +311,7 @@ On Success:
 }
 ```
 
-Input Invalid or Other Client Errors:
+##### Input Invalid or Other Client Errors:
 
 - status: 400
 - output:
@@ -322,7 +322,7 @@ Input Invalid or Other Client Errors:
 }
 ```
 
-Internal Error:
+##### Internal Error:
 
 - status: 500
 - output:

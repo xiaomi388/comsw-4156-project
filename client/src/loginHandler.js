@@ -17,9 +17,8 @@ class LoginHandler extends Component {
             method: 'GET',
             mode: 'no-cors',
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'cookie': "test0@columbia.edu"
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': ['GET', 'POST'],
             },
         };
 

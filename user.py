@@ -2,8 +2,9 @@ from wtforms import Form, validators, \
     EmailField, PasswordField, StringField, IntegerField
 import json
 import flask
-import sqlite3
 import userDB
+import sqlite3
+from flask_login import UserMixin
 
 
 class UserRegisterForm(Form):
@@ -46,6 +47,31 @@ def register(raw_form):
     return json.dumps({"error": ""}), 201
 
 
+class UserLoginObj(UserMixin):
+    def __init__(self, saved_user: userDB.User):
+        self.username = saved_user.get_name()
+        self.password_hash = saved_user.get_password()
+        self.email = saved_user.get_email()
+        self.user = saved_user
+
+    def get_id(self):  # the primary key is email, so return email
+        # get_id overwrite parent class method
+        return self.email
+
+    def get_email(self):
+        return self.email
+
+    @staticmethod
+    def get(email):
+        if not email:
+            return None
+        saved_user = userDB.select_user_by_email(email)
+        print(saved_user)
+        if not saved_user:
+            return None
+        return UserLoginObj(saved_user)
+
+
 def set_user_cookie(email: str, resp):
     resp.set_cookie('user', email)
 
@@ -58,17 +84,26 @@ def user_login(email, password):
     try:
         print(email, password)
         if not email or not password:
-            return json.dumps({"error": "invalid input"}), 400
+            return json.dumps({"error": "invalid input"}), 400, None
         saved_user = userDB.select_user_by_email(email)
         print(saved_user)
         if not saved_user:
-            return json.dumps({"error": f"No such email {email}"}), 400
+            return json.dumps({"error": f"No such email {email}"}), 400, None
         # To Do: md5
         if not password == saved_user.get_password():
-            return json.dumps({"error": f"wrong password {email}"}), 400
+            return json.dumps({"error": f"wrong password {email}"}), 400, None
         resp = flask.make_response(json.dumps({"error": ""}))
-        set_user_cookie(email, resp)
-        return resp, 200
+        # set_user_cookie(email, resp)
+        return resp, 200, UserLoginObj(saved_user)
     except Exception as e:
         print(e)
-        return json.dumps({"error": "Internal error"}), 500
+        return json.dumps({"error": "Internal error"}), 500, None
+
+
+def user_logout_resp():
+    return flask.make_response(json.dumps({"error": ""})), 200
+
+
+def need_login():
+    return flask.make_response(
+        json.dumps({"error": "You need to login to visit this page"})), 401

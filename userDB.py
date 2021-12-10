@@ -16,6 +16,12 @@ class User:
     def get_password(self):
         return self.password
 
+    def get_name(self):
+        return self.name
+
+    def get_email(self):
+        return self.email
+
 
 def select_user_by_email(email: str) -> User:
     try:

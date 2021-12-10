@@ -61,7 +61,8 @@ class TestUser(unittest.TestCase):
         with app.app_context():
             email = "zj2304@columbia.edu"
             password = "password"
-            resp, code = user.user_login(email, password)
+            resp, code, saved_user = user.user_login(email, password)
+            self.assertEqual(saved_user is not None, True)
             self.assertEqual(resp.data.decode("utf-8"), "{\"error\": \"\"}")
             self.assertEqual(code, 200)
 
@@ -71,7 +72,8 @@ class TestUser(unittest.TestCase):
         db.insert_mock_user()
         email = "888@columbia.edu"
         password = "password"
-        resp, code = user.user_login(email, password)
+        resp, code, saved_user = user.user_login(email, password)
+        self.assertEqual(saved_user, None)
         self.assertEqual(resp, json.dumps({"error": f"No such email {email}"}))
         self.assertEqual(code, 400)
 
@@ -81,7 +83,8 @@ class TestUser(unittest.TestCase):
         db.insert_mock_user()
         email = "zj2304@columbia.edu"
         password = "12345678900"
-        resp, code = user.user_login(email, password)
+        resp, code, saved_user = user.user_login(email, password)
+        self.assertEqual(saved_user, None)
         self.assertEqual(resp,
                          json.dumps({"error": f"wrong password {email}"}))
         self.assertEqual(code, 400)
@@ -92,6 +95,7 @@ class TestUser(unittest.TestCase):
         db.insert_mock_user()
         email = "zj2304@columbia.edu"
         password = None
-        resp, code = user.user_login(email, password)
+        resp, code, saved_user = user.user_login(email, password)
+        self.assertEqual(saved_user, None)
         self.assertEqual(resp, json.dumps({"error": "invalid input"}))
         self.assertEqual(code, 400)

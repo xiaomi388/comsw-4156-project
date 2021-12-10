@@ -3,6 +3,7 @@ from wtforms import Form, validators, \
 import json
 import flask
 import userDB
+import sqlite3
 from flask_login import UserMixin
 
 
@@ -44,6 +45,7 @@ def register(raw_form):
         if conn:
             conn.close()
     return json.dumps({"error": ""}), 201
+
 
 class UserLoginObj(UserMixin):
     def __init__(self, saved_user: userDB.User):

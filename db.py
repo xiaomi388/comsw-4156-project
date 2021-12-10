@@ -102,3 +102,22 @@ def insert_mock_user():
     except Error as e:
         print(e)
     return
+
+
+def insert_mock_furniture():
+    try:
+        mock_furniture = (1, "zj2304@columbia.edu",
+                          "Lamp", "cheap", "http", "very good")
+        conn = sqlite3.connect("sqlite_db")
+        conn.execute(
+            "INSERT INTO Furniture "
+            "(fid, owner, title,"
+            " labels , image_url, description ) "
+            "VALUES (?, ?, ?, ?, ?, ?)", mock_furniture
+        )
+
+        conn.commit()
+        print(f"mock user inserted {mock_furniture}")
+    except Error as e:
+        print(e)
+    return

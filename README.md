@@ -356,7 +356,7 @@ POST /furnitures/1/buy
 }
 ```
 
-##### Input Invalid:
+##### No such furniture:
 
 - status: 400
 - output:

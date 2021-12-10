@@ -22,6 +22,7 @@ class User:
     def get_email(self):
         return self.email
 
+
 def select_user_by_email(email: str) -> User:
     try:
         conn = sqlite3.connect("sqlite_db")

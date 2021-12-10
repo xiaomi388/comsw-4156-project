@@ -4,7 +4,8 @@ import search
 import user
 import profile
 import db
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_login import LoginManager, login_required,\
+    login_user, logout_user, current_user
 
 db.init_db()
 app = Flask(__name__)
@@ -17,7 +18,8 @@ app.secret_key = '4156'
 @app.route("/furnitures", methods=["POST"])
 @login_required
 def post_furniture():
-    return furniture.create_furniture(request.get_json(), current_user.get_email())
+    return furniture.create_furniture(
+        request.get_json(), current_user.get_email())
 
 
 @app.route("/furniture", methods=["GET"])

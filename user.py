@@ -2,7 +2,6 @@ from wtforms import Form, validators, \
     EmailField, PasswordField, StringField, IntegerField
 import json
 import flask
-import sqlite3
 import userDB
 from flask_login import UserMixin
 
@@ -53,7 +52,8 @@ class UserLoginObj(UserMixin):
         self.email = saved_user.get_email()
         self.user = saved_user
 
-    def get_id(self):  # the primary key is email, so return email, get_id overwrite parent class method
+    def get_id(self):  # the primary key is email, so return email
+        # get_id overwrite parent class method
         return self.email
 
     def get_email(self):
@@ -103,4 +103,5 @@ def user_logout_resp():
 
 
 def need_login():
-    return flask.make_response(json.dumps({"error": "You need to login to visit this page"})), 401
+    return flask.make_response(
+        json.dumps({"error": "You need to login to visit this page"})), 401

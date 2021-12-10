@@ -332,3 +332,59 @@ POST /furnitures/f123/rate?rating=5
   "error": "<specific reason>"
 }
 ```
+### **POST** - /furnitures/\<fid\>/buy
+
+Used by a buyer to show the intention to buy a furniture.
+
+#### Request
+
+- Example:
+```
+POST /furnitures/1/buy
+```
+
+#### Response
+
+##### On Success:
+
+- status code: 200
+- output:
+
+```
+{
+  "error": ""
+}
+```
+
+##### No such furniture:
+
+- status: 400
+- output:
+
+```
+{
+  "error": ""furniture not existed"
+}
+```
+    
+##### The furniture is already pending or sold:
+
+- status: 400
+- output:
+
+```
+{
+  "error": ""The item is already sold or in progress"
+}
+```
+
+##### Internal Error:
+
+- status: 500
+- output:
+
+```
+{
+  "error": "<specific reason>"
+}
+```

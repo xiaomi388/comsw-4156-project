@@ -4,7 +4,7 @@ import search
 import user
 import profile
 import db
-from flask_login import LoginManager, login_required,\
+from flask_login import LoginManager, login_required, \
     login_user, logout_user, current_user
 from flask_cors import CORS
 
@@ -77,6 +77,12 @@ def get_profile():
 def post_rate(fid):
     rating = request.args.get('rating', type=int)
     return furniture.rate_owner(fid, current_user.get_email(), rating)
+
+
+@app.route("/furnitures/<fid>/buy", methods=["POST"])
+@login_required
+def buy_furniture(fid):
+    return furniture.buy_furniture(fid, current_user.get_email())
 
 
 if __name__ == '__main__':

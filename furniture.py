@@ -90,3 +90,34 @@ def rate_owner(fid, buyer_email, rating):
         if conn:
             conn.close()
     return json.dumps({"error": ""}), 200
+
+
+def buy_furniture(fid, buyer_email):
+    if not fid:
+        return json.dumps({"error": "invalid input"}), 400
+    conn = None
+    try:
+        conn = sqlite3.connect("sqlite_db")
+        record = conn.execute(
+            "SELECT buyer, status FROM Furniture WHERE fid = ?",
+            [fid]
+        ).fetchone()
+        if record is None:
+            return json.dumps({"error": "furniture not existed"}), 400
+        existed_buyer_email, status = record
+        if status != "init":
+            return json.dumps(
+                {"error": "The item is already sold or in progress"}), 400
+        conn.execute(
+            "UPDATE Furniture SET buyer = "
+            "?, status = ?"
+            "WHERE fid = ?",
+            [buyer_email, "pending", fid]
+        )
+        conn.commit()
+    except sqlite3.Error as e:
+        return json.dumps({"error": f"db error: {str(e)}"}), 500
+    finally:
+        if conn:
+            conn.close()
+    return json.dumps({"error": ""}), 200

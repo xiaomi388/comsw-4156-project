@@ -3,6 +3,7 @@ import furniture
 import json
 import sqlite3
 from unittest.mock import patch
+import db
 
 
 class TestFurniture(unittest.TestCase):
@@ -173,3 +174,31 @@ class TestFurniture(unittest.TestCase):
 
         self.assertEqual(code, 500)
         self.assertEqual(ret, json.dumps({"error": "db error: mockerr"}))
+
+    def test_buy_furniture_happy_path(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        db.insert_mock_furniture()
+        resp, code = furniture.buy_furniture(1, "zj2304@columbia.edu")
+        self.assertEqual(code, 200)
+        self.assertEqual(resp, json.dumps({"error": ""}))
+
+    def test_buy_furniture_no_such_furniture(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        resp, code = furniture.buy_furniture(1, "zj2304@columbia.edu")
+        self.assertEqual(resp, json.dumps({"error": "furniture not existed"}))
+        self.assertEqual(code, 400)
+
+    def test_buy_furniture_already_pending(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        db.insert_mock_furniture()
+        _, _ = furniture.buy_furniture(1, "zj2304@columbia.edu")
+        resp, code = furniture.buy_furniture(1, "zj2304@columbia.edu")
+        self.assertEqual(resp, json.dumps(
+                {"error": "The item is already sold or in progress"}))
+        self.assertEqual(code, 400)

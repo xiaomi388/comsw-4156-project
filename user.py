@@ -69,6 +69,7 @@ class UserLoginObj(UserMixin):
             return None
         return UserLoginObj(saved_user)
 
+
 def set_user_cookie(email: str, resp):
     resp.set_cookie('user', email)
 
@@ -101,3 +102,5 @@ def user_logout_resp():
     return flask.make_response(json.dumps({"error": ""})), 200
 
 
+def need_login():
+    return flask.make_response(json.dumps({"error": "You need to login to visit this page"})), 401

@@ -42,6 +42,12 @@ def load_user(user_id):
     return user.UserLoginObj.get(user_id)
 
 
+@login_manager.unauthorized_handler
+def unauthorized():
+    # do stuff
+    return user.need_login_response()
+
+
 @app.route('/user/logout', methods=["GET"])
 @login_required
 def logout():

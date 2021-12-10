@@ -1,27 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
-import { useCookies } from "react-cookie";
 
 import RegisterHandler from './registerHandler';
 import FurnitureHandler from './furnitureHandler.js';
 import ProfileHandler from './profileHandler.js';
 import LoginHandler from './loginHandler.js';
+import SearchHandler from './searchHandler.js';
 
 
 function App() {
-  const [cookies, setCookie] = useCookies(["user"]);
 
-  function handleCookie() {
-    console.log("Set cookie user: ", "test0@columbia.edu");
-    setCookie("user", "test0@columbia.edu", {
-      path: "/"
-    });
-  }
   return (
     <div className="App">
-
-      <button onClick={handleCookie}>set cookie</button>
-      cookies.user: {cookies.user}
 
       <RegisterHandler />
       <br />
@@ -33,6 +23,16 @@ function App() {
       <br />
       
       <ProfileHandler />
+      <br />
+
+      <SearchHandler />
+      <br />
+
+      {/* BuybuybuyHandler
+
+      SellerConfirmHandler
+
+      BuyerRatingHandler */}
 
     </div>
   );

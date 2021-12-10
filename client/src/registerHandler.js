@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as Constants from './constants';
+
 
 class RegisterHandler extends Component {
 
@@ -9,14 +11,13 @@ class RegisterHandler extends Component {
 
     register = () => {
         const { username, password } = this.state;
-        alert(`register! username:${username}, password:${password}`);
         
         // Send post request
-        const registerUrl = 'http://localhost:5000/register';
+        const registerUrl = `${Constants.BASE_URL}/register`;
 
         fetch(registerUrl, {
             method: 'POST',
-            mode: 'no-cors',
+            // mode: 'no-cors',
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': ['GET', 'POST'],
@@ -31,7 +32,13 @@ class RegisterHandler extends Component {
         })
         .then((res) => res)
         .then((data) => {
-            console.log("data: ", data);
+            if (data.status === 400) {
+                alert(`ERROR: Somehow you cant register with email=${username}.`);
+            } else if (data.status == 201) {
+                alert(`Congrats! Successfully register with email=${username}.`);
+            } else {
+                alert('ERROR: Other(Invalid format).');
+            }
         })
         .catch((err) => alert(`ERROR: Invalid username=${username}, err=${err}.`));
 
@@ -43,8 +50,8 @@ class RegisterHandler extends Component {
                 <h3>
                     Register Handler
                 </h3>
-                <input placeholder="username" onChange={(e) => this.setState({ username: e.target.value })}></input>
-                <input placeholder="password" onChange={(e) => this.setState({ password: e.target.value})}></input>
+                <input placeholder="email" onChange={(e) => this.setState({ username: e.target.value })}></input>
+                <input placeholder="password(at least 8 characters)" onChange={(e) => this.setState({ password: e.target.value})}></input>
                 <button onClick={this.register}>Register</button>
                 
             </div>

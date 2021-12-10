@@ -6,6 +6,7 @@ import profile
 import db
 from flask_login import LoginManager, login_required, \
     login_user, logout_user, current_user
+from flask_cors import CORS
 
 db.init_db()
 app = Flask(__name__)
@@ -13,6 +14,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "/user/login"
 app.secret_key = '4156'
+CORS(app)
 
 
 @app.route("/furnitures", methods=["POST"])

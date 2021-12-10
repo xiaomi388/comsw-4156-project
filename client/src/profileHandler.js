@@ -1,34 +1,32 @@
 import React, { Component } from 'react';
+import * as Constants from './constants';
+
 
 class ProfileHandler extends Component {
     
     getUserProfile = () => {
         alert("Get user profile");
 
-        const getUserProfileUrl = 'http://localhost:5000/profile';
-        const requestOptions = {
+        const getUserProfileUrl = `${Constants.BASE_URL}/profile`;
+        fetch(getUserProfileUrl, {
             method: 'GET',
-            mode: 'no-cors',
-            headers: { 
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'cookie': "test0@columbia.edu"
+            credentials: 'same-origin',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': ['GET', 'POST'],
             },
-        };
-        fetch(getUserProfileUrl, requestOptions)
-            .then(response => response.json())
-            .then((data) => {
-                console.log("get user profile data: ", data);
-            })
-            .catch((err) => console.log(err))
+        })
+        .then(response => response)
+        .then((data) => {
+            console.log("get user profile data: ", data);
+        })
+        .catch((err) => console.log(err))
     }
     
     render() {
-        document.cookie = "email='test0@columbia.edu'";
         return(
             <div>
-                <h3>Profile Handler</h3>
-
+                <h3>Profile Handler</h3> <p>(Cannot get profile without login)</p>
                 <button onClick={this.getUserProfile}>Get Profile</button>
             </div>
         )

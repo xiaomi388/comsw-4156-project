@@ -1,49 +1,42 @@
 import React, { Component } from 'react';
+import * as Constants from './constants';
+
 
 class LoginHandler extends Component {
 
     state = {
-        username: '',
+        email: '',
         password: ''
     }
 
     login = () => {
-        const { username, password } = this.state;
-        alert(`log in! username:${username}, password:${password}`);
-        
+        const { email, password } = this.state;
+        const loginUrl = `${Constants.BASE_URL}/user/login?email=${email}&password=${password}`;
+
         // Send get request
-        const loginUrl = 'http://localhost:5000/login';
-        const requestOptions = {
-            method: 'GET',
-            mode: 'no-cors',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': ['GET', 'POST'],
-            },
-        };
-
-
-        fetch(loginUrl, requestOptions)
-            // method: 'GET',
-            // mode: 'no-cors',
-            // headers: {
-            //     'Access-Control-Allow-Origin': '*',
-            //     'Access-Control-Allow-Methods': ['GET', 'POST'],
-            // },
-            // body: new URLSearchParams({
-            //     'email': username,
-            //     'password': password
-            //     // 'name': 'testtestuser',
-            //     // 'mobile_phone': 8148888477,
-            //     // 'zipcode': 10026
-            // })
-
-        .then((req) => req.json())
+        fetch(loginUrl)
+        .then((res) => res)
         .then((data) => {
-            console.log("data: ", data);
+            console.log(data);
+            console.log(data.status)
+            if (data.status === 400) {
+                alert(`ERROR: Fail to login, email=${email}.`);
+            } else if (data.status == 200) {
+                alert(`Yeah! Login in successfully with email=${email}`);
+            } else {
+                alert('ERROR: Invalid Credentials.');
+            }
         })
-        .catch((err) => alert(`ERROR: Invalid username=${username}, err=${err}.`));
+        .catch((err) => alert(`ERROR: Fail to login, email=${email}, err=${err}.`));
+    }
 
+    logout = () => {
+        const logoutUrl = `${Constants.BASE_URL}/user/logout`;
+        fetch(logoutUrl)
+        .then((res) => res.json()) 
+        .then((data) => {
+            alert('Logout!');
+        })
     }
 
     render() {
@@ -53,10 +46,10 @@ class LoginHandler extends Component {
                 <h3>
                     Login Handler
                 </h3>
-                <input placeholder="username" onChange={(e) => this.setState({ username: e.target.value })}></input>
+                <input placeholder="email" onChange={(e) => this.setState({ email: e.target.value })}></input>
                 <input placeholder="password" onChange={(e) => this.setState({ password: e.target.value})}></input>
                 <button onClick={this.login}>Log In</button>
-                
+                <button onClick={this.logout}>Log Out</button>
             </div>
         )
     }

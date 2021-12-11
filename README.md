@@ -388,7 +388,7 @@ POST /furnitures/1/buy
   "error": "<specific reason>"
 }
 ```
-### **POST** - /furnitures/\<fid\>/confirm?confirm=\<true/false\>
+### **POST** - /furnitures/\<fid\>/confirm?confirm=\<True/False\>
 
 Used by a furniture owner to confirm the pending transaction with the id of <fid> when the transaction is pending. 
 Confirm/not confirm is true/false depend on params.

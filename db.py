@@ -1,6 +1,10 @@
 import sqlite3
 from sqlite3 import Error
 
+from werkzeug.datastructures import ImmutableMultiDict
+
+import user
+
 
 def init_db():
     """Create User, Furniture, Transaction tables."""
@@ -87,18 +91,15 @@ def populate_testing_data():
 
 def insert_mock_user():
     try:
-        mock_user = ("zj2304@columbia.edu", "password",
-                     "Zhihao Jiang", 10025, 10, 1, "6466466646")
-        conn = sqlite3.connect("sqlite_db")
-        conn.execute(
-            "INSERT INTO User "
-            "(email, password, name, zipcode,"
-            " rating, transaction_count, phone_number) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?)", mock_user
-        )
+        mock_form = ImmutableMultiDict([
+            ('email', 'zj2304@columbia.edu'),
+            ('password', 'password'),
+            ('name', 'Zhihao Jiang'),
+            ('mobile_phone', '6466466646'),
+            ('zipcode', 10025)])
 
-        conn.commit()
-        print(f"mock user inserted {mock_user}")
+        _, _ = user.register(mock_form)
+        print(f"mock user inserted {mock_form}")
     except Error as e:
         print(e)
     return

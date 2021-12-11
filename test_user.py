@@ -59,9 +59,10 @@ class TestUser(unittest.TestCase):
         db.insert_mock_user()
         app = Flask(__name__)
         with app.app_context():
-            email = "zj2304@columbia.edu"
-            password = "password"
-            resp, code, saved_user = user.user_login(email, password)
+            mock_form = ImmutableMultiDict([
+                ('email', 'zj2304@columbia.edu'),
+                ('password', 'password')])
+            resp, code, saved_user = user.user_login(mock_form)
             self.assertEqual(saved_user is not None, True)
             self.assertEqual(resp.data.decode("utf-8"), "{\"error\": \"\"}")
             self.assertEqual(code, 200)
@@ -70,9 +71,12 @@ class TestUser(unittest.TestCase):
         db.clear()
         db.init_db()
         db.insert_mock_user()
-        email = "888@columbia.edu"
-        password = "password"
-        resp, code, saved_user = user.user_login(email, password)
+        email = '888@columbia.edu'
+        password = 'password'
+        mock_form = ImmutableMultiDict([
+            ('email', email),
+            ('password', password)])
+        resp, code, saved_user = user.user_login(mock_form)
         self.assertEqual(saved_user, None)
         self.assertEqual(resp, json.dumps({"error": f"No such email {email}"}))
         self.assertEqual(code, 400)
@@ -83,7 +87,10 @@ class TestUser(unittest.TestCase):
         db.insert_mock_user()
         email = "zj2304@columbia.edu"
         password = "12345678900"
-        resp, code, saved_user = user.user_login(email, password)
+        mock_form = ImmutableMultiDict([
+            ('email', email),
+            ('password', password)])
+        resp, code, saved_user = user.user_login(mock_form)
         self.assertEqual(saved_user, None)
         self.assertEqual(resp,
                          json.dumps({"error": f"wrong password {email}"}))
@@ -95,7 +102,10 @@ class TestUser(unittest.TestCase):
         db.insert_mock_user()
         email = "zj2304@columbia.edu"
         password = None
-        resp, code, saved_user = user.user_login(email, password)
+        mock_form = ImmutableMultiDict([
+            ('email', email),
+            ('password', password)])
+        resp, code, saved_user = user.user_login(mock_form)
         self.assertEqual(saved_user, None)
         self.assertEqual(resp, json.dumps({"error": "invalid input"}))
         self.assertEqual(code, 400)

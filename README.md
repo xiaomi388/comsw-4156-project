@@ -24,6 +24,19 @@ coverage html
 
 The flake8 and coverage reports have been stored in the `report` folder.
 
+## Continuous Deployment
+
+When the master branch is changed, CI will deploy the code to the host below automatically:
+
+https://w4156-alohomora.herokuapp.com/
+
+## Continuous Integration Report
+
+ci reports can be found by clicking `details`:
+
+![cireport](cireport.jpg)
+
+
 ## API
 
 ### **POST** - /register

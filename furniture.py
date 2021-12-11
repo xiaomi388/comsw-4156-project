@@ -121,3 +121,58 @@ def buy_furniture(fid, buyer_email):
         if conn:
             conn.close()
     return json.dumps({"error": ""}), 200
+
+
+def owner_confirm(fid, curr_user_email, is_confirm):
+    if not fid:
+        return json.dumps({"error": "invalid input"}), 400
+
+    conn = None
+    try:
+        conn = sqlite3.connect("sqlite_db")
+
+        record = conn.execute(
+            "SELECT buyer, owner, status FROM Furniture WHERE fid = ?",
+            [fid]
+        ).fetchone()
+        if record is None:
+            return json.dumps({"error": "fid not existed"}), 400
+        buyer_email, owner_email, status = record
+
+        if curr_user_email != owner_email:
+            return json.dumps(
+                {"error": "Only owner can confirm the transaction."}), 400
+
+        if status != "pending":
+            return json.dumps(
+                {"error": "the owner can only confirm "
+                          "the pending transaction"}), 400
+
+        new_status = "completed"
+        if is_confirm == 'False':
+            new_status = 'init'
+            buyer_email = None
+
+        conn.execute(
+            "UPDATE furniture SET buyer =?, status = ? "
+            "WHERE fid = ?",
+            [buyer_email, new_status, fid]
+        )
+
+        curr_trans_count = conn.execute(
+            "SELECT COUNT(*) FROM Furniture "
+            "WHERE status = 'completed' "
+            "and owner = ?", [curr_user_email]
+        ).fetchone()
+
+        conn.execute(
+            "UPDATE user SET transaction_count = ? WHERE email = ?",
+            [curr_trans_count[0], curr_user_email]
+        )
+        conn.commit()
+    except sqlite3.Error as e:
+        return json.dumps({"error": f"db error: {str(e)}"}), 500
+    finally:
+        if conn:
+            conn.close()
+    return json.dumps({"error": ""}), 200

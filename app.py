@@ -6,6 +6,7 @@ import profile
 import db
 from flask_login import LoginManager, login_required, \
     login_user, logout_user, current_user
+from flask_cors import CORS
 
 db.init_db()
 app = Flask(__name__)
@@ -13,6 +14,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "/user/login"
 app.secret_key = '4156'
+CORS(app)
 
 
 @app.route("/furnitures", methods=["POST"])
@@ -33,6 +35,7 @@ def search_furniture():
 def user_login():
     email = request.args.get("email")
     password = request.args.get("password")
+    print(request.args)
     resp, status_code, user_login_obj = user.user_login(email, password)
     if status_code == 200:
         login_user(user_login_obj)
@@ -81,6 +84,14 @@ def post_rate(fid):
 @login_required
 def buy_furniture(fid):
     return furniture.buy_furniture(fid, current_user.get_email())
+
+
+@app.route("/furnitures/<fid>/confirm", methods=["POST"])
+@login_required
+def owner_confirm(fid):
+    is_confirm = request.args.get('confirm')
+    print(is_confirm)
+    return furniture.owner_confirm(fid, current_user.get_email(), is_confirm)
 
 
 if __name__ == '__main__':

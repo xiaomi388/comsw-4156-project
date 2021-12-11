@@ -1,0 +1,16 @@
+./user.py:1:80: E501 line too long (90 > 79 characters)
+./user.py:9:80: E501 line too long (80 > 79 characters)
+./user.py:10:68: E231 missing whitespace after ','
+./user.py:10:80: E501 line too long (102 > 79 characters)
+./user.py:11:80: E501 line too long (97 > 79 characters)
+./user.py:12:80: E501 line too long (104 > 79 characters)
+./user.py:18:5: E265 block comment should start with '# '
+./user.py:22:80: E501 line too long (107 > 79 characters)
+./user.py:28:80: E501 line too long (101 > 79 characters)
+./user.py:40:1: E303 too many blank lines (3)
+./user.py:49:1: E303 too many blank lines (3)
+./userDB.py:6:45: E203 whitespace before ','
+./userDB.py:32:13: E122 continuation line missing indentation or outdented
+./test_user.py:2:1: F401 'sqlite3' imported but unused
+./test_user.py:29:9: E265 block comment should start with '# '
+./test_user.py:59:5: E303 too many blank lines (2)

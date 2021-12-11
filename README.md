@@ -24,6 +24,19 @@ coverage html
 
 The flake8 and coverage reports have been stored in the `report` folder.
 
+## Continuous Deployment
+
+When the master branch is changed, CI will deploy the code to the host below automatically:
+
+https://w4156-alohomora.herokuapp.com/
+
+## Continuous Integration Report
+
+ci reports can be found by clicking `details`:
+
+![cireport](cireport.jpg)
+
+
 ## API
 
 ### **POST** - /register
@@ -330,5 +343,116 @@ POST /furnitures/f123/rate?rating=5
 ```
 {
   "error": "<specific reason>"
+}
+```
+### **POST** - /furnitures/\<fid\>/buy
+
+Used by a buyer to show the intention to buy a furniture.
+
+#### Request
+
+- Example:
+```
+POST /furnitures/1/buy
+```
+
+#### Response
+
+##### On Success:
+
+- status code: 200
+- output:
+
+```
+{
+  "error": ""
+}
+```
+
+##### No such furniture:
+
+- status: 400
+- output:
+
+```
+{
+  "error": ""furniture not existed"
+}
+```
+    
+##### The furniture is already pending or sold:
+
+- status: 400
+- output:
+
+```
+{
+  "error": ""The item is already sold or in progress"
+}
+```
+
+##### Internal Error:
+
+- status: 500
+- output:
+
+```
+{
+  "error": "<specific reason>"
+}
+```
+### **POST** - /furnitures/\<fid\>/confirm?confirm=\<True/False\>
+
+Used by a furniture owner to confirm the pending transaction with the id of <fid> when the transaction is pending. 
+Confirm/not confirm is true/false depend on params.
+If confirm=False, the furniture status goes back to "init", and buyer is set to NULL.
+
+#### Request
+
+- Example:
+```
+POST /furnitures/1/confirm?confirm=True
+```
+
+#### Response
+
+##### On Success:
+
+- status code: 200
+- output:
+
+```
+{
+  "error": ""
+}
+```
+
+##### Input Invalid(no such furniture/not owner/not pending):
+
+- status: 400
+- output:
+```
+{
+"error": "fid not existed."
+}
+```
+```
+{
+"error": "Only owner can confirm the transaction."
+}
+```
+```
+{
+"error": "the owner can only confirm the pending transaction"
+}
+```
+##### Internal Error:
+
+- status: 500
+- output:
+
+```
+{
+  "error": "f'db error <specific reason>"
 }
 ```

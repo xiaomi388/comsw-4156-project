@@ -118,6 +118,42 @@ def insert_mock_furniture():
 
         conn.commit()
         print(f"mock user inserted {mock_furniture}")
+        print(f"mock furniture inserted {mock_furniture}")
+    except Error as e:
+        print(e)
+    return
+
+
+def insert_mock_buyer():
+    try:
+        mock_user = ("buyer_zj@columbia.edu", "password",
+                     "Buyer_Sause", 10025, 10, 1, "6466466646")
+        conn = sqlite3.connect("sqlite_db")
+        conn.execute(
+            "INSERT INTO User "
+            "(email, password, name, zipcode,"
+            " rating, transaction_count, phone_number) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)", mock_user
+        )
+
+        conn.commit()
+        print(f"mock user for buying inserted {mock_user}")
+    except Error as e:
+        print(e)
+    return
+
+
+def mock_buy(status):
+    try:
+        conn = sqlite3.connect("sqlite_db")
+        cur = conn.cursor()
+        cur.execute(
+            "UPDATE Furniture "
+            "SET buyer = ?, status = ? where fid = 1",
+            ['buyer_zj@columbia.edu', status]
+        )
+        conn.commit()
+        print("mock buying behavior")
     except Error as e:
         print(e)
     return

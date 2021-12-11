@@ -13,6 +13,9 @@ orbs:
   python: circleci/python@1.2
   codecov: codecov/codecov@3.0.0
   commitlint: conventional-changelog/commitlint@1.0.0
+  sonarcloud: sonarsource/sonarcloud@1.0.3
+  heroku: circleci/heroku@1.2.6
+  newman: postman/newman@0.0.2
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -80,6 +83,27 @@ jobs:
       - store_artifacts:
           path: htmlcov
       - codecov/upload
+  sonar:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - sonarcloud/scan
+  heroku:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git:
+          force: true
+  postman:
+    executor: newman/postman-newman-docker
+    steps:
+      - checkout
+      - newman/newman-run:
+          collection: ./postman_collection.json
+          environment: ./postman_environment.json
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -87,12 +111,15 @@ workflows:
   workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - commitlint/lint:
-          filters:
-            branches:
-              ignore:
-                - master
-          target-branch: master
       - flake8
       - coverage
       - cyclomatic-complexity
+      - sonar
+      - heroku:
+          filters:
+            branches:
+              only:
+                - master
+      - postman:
+          requires:
+            - heroku

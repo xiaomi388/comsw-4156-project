@@ -14,6 +14,7 @@ orbs:
   codecov: codecov/codecov@3.0.0
   commitlint: conventional-changelog/commitlint@1.0.0
   sonarcloud: sonarsource/sonarcloud@1.0.3
+  heroku: circleci/heroku@1.2.6
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -87,6 +88,12 @@ jobs:
     steps:
       - checkout
       - sonarcloud/scan
+  heroku:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -98,3 +105,8 @@ workflows:
       - coverage
       - cyclomatic-complexity
       - sonar
+      - heroku:
+          filters:
+            branches:
+              only:
+                - master

@@ -4,3 +4,4 @@ wtforms
 werkzeug
 email_validator
 flask_login
+gunicorn

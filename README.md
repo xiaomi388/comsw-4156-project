@@ -398,7 +398,7 @@ If confirm=False, the furniture status goes back to "init", and buyer is set to 
 
 - Example:
 ```
-POST /furnitures/f123/rate?rating=5
+POST /furnitures/1/confirm?confirm=True
 ```
 
 #### Response

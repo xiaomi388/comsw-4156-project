@@ -94,7 +94,7 @@ def need_login_response():
 
 def user_login(raw_form):
     try:
-        form = UserRegisterForm(raw_form)
+        form = UserLoginForm(raw_form)
         if not form.validate():
             return json.dumps({"invalid input": form.errors}), 400, None
         password = hashlib.sha256(

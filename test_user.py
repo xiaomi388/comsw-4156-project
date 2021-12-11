@@ -107,5 +107,7 @@ class TestUser(unittest.TestCase):
             ('password', password)])
         resp, code, saved_user = user.user_login(mock_form)
         self.assertEqual(saved_user, None)
-        self.assertEqual(resp, json.dumps({"error": "invalid input"}))
+        supposed_resp =\
+            {"invalid input": {"password": ["This field is required."]}}
+        self.assertEqual(resp, json.dumps(supposed_resp))
         self.assertEqual(code, 400)

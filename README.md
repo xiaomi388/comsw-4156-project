@@ -240,17 +240,22 @@ GET /profile?keyword="test0@email.com"
     {"error": "internal error"}
     ```
 
-### **GET** - /user/login?email=<userEmail>&password=<userPassword>
-
+### **POST** - /user/login
+    
 User login
 
-#### Request
+##### Body Parameters
 
 - Example:
 
 ```
-GET /user/login?email=aabb@columbia.edu&password=1234
+{
+  "email": "zj2304@columbia.edu",
+  "passowrd": "password"
+}
 ```
+    
+#### Request
     
 ##### Created successfully
 

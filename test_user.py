@@ -111,3 +111,27 @@ class TestUser(unittest.TestCase):
             json.dumps({"error": "invalid input"})
         self.assertEqual(resp, supposed_resp)
         self.assertEqual(code, 400)
+
+    def test_get_user_happy_path(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        email = "zj2304@columbia.edu"
+        saved_user = user.UserLoginObj.get(email)
+        self.assertEqual(saved_user is not None, True)
+
+    def test_get_user_empty_email(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        email = ""
+        saved_user = user.UserLoginObj.get(email)
+        self.assertEqual(saved_user, None)
+
+    def test_get_user_no_such_email(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        email = "asdf@columbia.edu"
+        saved_user = user.UserLoginObj.get(email)
+        self.assertEqual(saved_user, None)

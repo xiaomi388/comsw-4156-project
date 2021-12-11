@@ -31,12 +31,9 @@ def search_furniture():
     return res
 
 
-@app.route("/user/login", methods=["GET"])
+@app.route("/user/login", methods=["POST"])
 def user_login():
-    email = request.args.get("email")
-    password = request.args.get("password")
-    print(request.args)
-    resp, status_code, user_login_obj = user.user_login(email, password)
+    resp, status_code, user_login_obj = user.user_login(request.form)
     if status_code == 200:
         login_user(user_login_obj)
     return resp, status_code
@@ -49,7 +46,6 @@ def load_user(user_id):
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    # do stuff
     return user.need_login_response()
 
 

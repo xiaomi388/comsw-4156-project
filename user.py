@@ -25,6 +25,15 @@ class UserRegisterForm(Form):
     zipcode = IntegerField('Zipcode', [validators.DataRequired()])
 
 
+class UserLoginForm(Form):
+    email = EmailField('Email',
+                       [validators.DataRequired(),
+                        validators.Email()])
+    password = PasswordField('Password',
+                             [validators.DataRequired(),
+                              validators.length(min=8, max=30)])
+
+
 def register(raw_form):
     form = UserRegisterForm(raw_form)
     if not form.validate():
@@ -83,20 +92,22 @@ def need_login_response():
     return json.dumps({"error": "Please login first"}), 400
 
 
-def user_login(email, password):
+def user_login(raw_form):
     try:
-        print(email, password)
-        if not email or not password:
+        form = UserLoginForm(raw_form)
+        if not form.validate():
             return json.dumps({"error": "invalid input"}), 400, None
+        password = hashlib.sha256(
+            str(form.password.data).encode('utf-8')).hexdigest()
+        email = form.email.data
+        print(email, password)
         saved_user = userDB.select_user_by_email(email)
         print(saved_user)
         if not saved_user:
             return json.dumps({"error": f"No such email {email}"}), 400, None
-        # To Do: md5
         if not password == saved_user.get_password():
             return json.dumps({"error": f"wrong password {email}"}), 400, None
         resp = flask.make_response(json.dumps({"error": ""}))
-        # set_user_cookie(email, resp)
         return resp, 200, UserLoginObj(saved_user)
     except Exception as e:
         print(e)

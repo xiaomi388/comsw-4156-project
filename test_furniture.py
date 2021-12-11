@@ -202,3 +202,50 @@ class TestFurniture(unittest.TestCase):
         self.assertEqual(resp, json.dumps(
                 {"error": "The item is already sold or in progress"}))
         self.assertEqual(code, 400)
+
+    def test_owner_confirm_happy_path(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        db.insert_mock_furniture()
+        db.insert_mock_buyer()
+        db.mock_buy('pending')
+        resp, code = furniture.owner_confirm(1, "zj2304@columbia.edu", "True")
+        self.assertEqual(resp, json.dumps({"error": ""}))
+        self.assertEqual(code, 200)
+
+    def test_owner_confirm_no_such_fid(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        db.insert_mock_furniture()
+        db.insert_mock_buyer()
+        db.mock_buy('pending')
+        resp, code = furniture.owner_confirm(10, "zj2304@columbia.edu", "True")
+        self.assertEqual(resp, json.dumps({"error": "fid not existed"}))
+        self.assertEqual(code, 400)
+
+    def test_owner_confirm_not_owner(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        db.insert_mock_furniture()
+        db.insert_mock_buyer()
+        db.mock_buy('pending')
+        resp, code = furniture.owner_confirm(1, "buyer_zj@columbia.edu", "True")
+        self.assertEqual(resp, json.dumps(
+            {"error": "Only owner can confirm the transaction."}))
+        self.assertEqual(code, 400)
+
+    def test_owner_confirm_not_owner(self):
+        db.clear()
+        db.init_db()
+        db.insert_mock_user()
+        db.insert_mock_furniture()
+        db.insert_mock_buyer()
+        db.mock_buy('init')
+        resp, code = furniture.owner_confirm(1, "zj2304@columbia.edu", "True")
+        self.assertEqual(resp, json.dumps(
+            {"error": "the owner can only confirm "
+                      "the pending transaction"}))
+        self.assertEqual(code, 400)

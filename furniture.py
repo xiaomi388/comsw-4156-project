@@ -130,6 +130,7 @@ def owner_confirm(fid, curr_user_email, is_confirm):
     conn = None
     try:
         conn = sqlite3.connect("sqlite_db")
+
         record = conn.execute(
             "SELECT buyer, owner, status FROM Furniture WHERE fid = ?",
             [fid]
@@ -148,7 +149,7 @@ def owner_confirm(fid, curr_user_email, is_confirm):
                           "the pending transaction"}), 400
 
         new_status = "completed"
-        if not is_confirm:
+        if is_confirm == 'False':
             new_status = 'init'
             buyer_email = None
 
@@ -157,11 +158,16 @@ def owner_confirm(fid, curr_user_email, is_confirm):
             "WHERE fid = ?",
             [buyer_email, new_status, fid]
         )
+
+        curr_trans_count = conn.execute(
+            "SELECT COUNT(*) FROM Furniture "
+            "WHERE status = 'completed' "
+            "and owner = ?",[curr_user_email]
+        ).fetchone()
+
         conn.execute(
-            "UPDATE user SET transaction_count = "
-            "transaction_count+1"
-            "WHERE email = ?",
-            [curr_user_email]
+            "UPDATE user SET transaction_count = ? WHERE email = ?",
+            [curr_trans_count[0], curr_user_email]
         )
         conn.commit()
     except sqlite3.Error as e:

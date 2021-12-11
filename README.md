@@ -388,3 +388,58 @@ POST /furnitures/1/buy
   "error": "<specific reason>"
 }
 ```
+### **POST** - /furnitures/\<fid\>/confirm?confirm=\<true/false\>
+
+Used by a furniture owner to confirm the pending transaction with the id of <fid> when the transaction is pending. 
+Confirm/not confirm is true/false depend on params.
+If confirm=False, the furniture status goes back to "init", and buyer is set to NULL.
+
+#### Request
+
+- Example:
+```
+POST /furnitures/f123/rate?rating=5
+```
+
+#### Response
+
+##### On Success:
+
+- status code: 200
+- output:
+
+```
+{
+  "error": ""
+}
+```
+
+##### Input Invalid(no such furniture/not owner/not pending):
+
+- status: 400
+- output:
+```
+{
+"error": "fid not existed."
+}
+```
+```
+{
+"error": "Only owner can confirm the transaction."
+}
+```
+```
+{
+"error": "the owner can only confirm the pending transaction"
+}
+```
+##### Internal Error:
+
+- status: 500
+- output:
+
+```
+{
+  "error": "f'db error <specific reason>"
+}
+```

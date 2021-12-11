@@ -232,12 +232,13 @@ class TestFurniture(unittest.TestCase):
         db.insert_mock_furniture()
         db.insert_mock_buyer()
         db.mock_buy('pending')
-        resp, code = furniture.owner_confirm(1, "buyer_zj@columbia.edu", "True")
+        resp, code = furniture.owner_confirm(
+            1, "buyer_zj@columbia.edu", "True")
         self.assertEqual(resp, json.dumps(
             {"error": "Only owner can confirm the transaction."}))
         self.assertEqual(code, 400)
 
-    def test_owner_confirm_not_owner(self):
+    def test_owner_confirm_not_pending(self):
         db.clear()
         db.init_db()
         db.insert_mock_user()

@@ -122,6 +122,7 @@ def insert_mock_furniture():
         print(e)
     return
 
+
 def insert_mock_buyer():
     try:
         mock_user = ("buyer_zj@columbia.edu", "password",
@@ -140,6 +141,7 @@ def insert_mock_buyer():
         print(e)
     return
 
+
 def mock_buy(status):
     try:
         conn = sqlite3.connect("sqlite_db")
@@ -148,7 +150,8 @@ def mock_buy(status):
             "UPDATE Furniture "
             "SET buyer = 'buyer_zj@columbia.edu', "
             "status = ? " 
-            "where fid = 1", [status])
+            "where fid = 1", [status]
+        )
         conn.commit()
         print(f"mock buying behavior")
     except Error as e:

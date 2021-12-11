@@ -85,6 +85,7 @@ def post_rate(fid):
 def buy_furniture(fid):
     return furniture.buy_furniture(fid, current_user.get_email())
 
+
 @app.route("/furnitures/<fid>/confirm", methods=["POST"])
 @login_required
 def owner_confirm(fid):

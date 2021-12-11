@@ -318,7 +318,7 @@
 			"name": "User Login",
 			"item": [
 				{
-					"name": "Login success",
+					"name": "Owner login success",
 					"event": [
 						{
 							"listen": "test",
@@ -337,26 +337,31 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "owner@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{baseUrl}}/user/login?email=owner@columbia.edu&password=12341234",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
 								"login"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "owner@columbia.edu"
-								},
-								{
-									"key": "password",
-									"value": "12341234"
-								}
 							]
 						}
 					},
@@ -371,8 +376,6 @@
 								"exec": [
 									"pm.test(\"invalid input\", function () {\r",
 									"    pm.response.to.have.status(400);\r",
-									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.error).to.eql(\"invalid input\");\r",
 									"});\r",
 									"\r",
 									""
@@ -382,10 +385,27 @@
 						}
 					],
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "zj2304@columbia.edu",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{baseUrl}}/user/login?email=zj2304@columbia.edu",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -396,7 +416,8 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "zj2304@columbia.edu"
+									"value": "zj2304@columbia.edu",
+									"disabled": true
 								}
 							]
 						}
@@ -423,10 +444,31 @@
 						}
 					],
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "2222@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{baseUrl}}/user/login?email=2222@columbia.edu&password=password",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -437,11 +479,13 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "2222@columbia.edu"
+									"value": "2222@columbia.edu",
+									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": "password"
+									"value": "password",
+									"disabled": true
 								}
 							]
 						}
@@ -468,10 +512,25 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "owner@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "passworddd",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{baseUrl}}/user/login?email=owner@columbia.edu&password=1234666",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -482,11 +541,13 @@
 							"query": [
 								{
 									"key": "email",
-									"value": "owner@columbia.edu"
+									"value": "zj2304@columbia.edu",
+									"disabled": true
 								},
 								{
 									"key": "password",
-									"value": "1234666"
+									"value": "passworddd",
+									"disabled": true
 								}
 							]
 						}
@@ -712,26 +773,31 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "buyer@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{baseUrl}}/user/login?email=buyer@columbia.edu&password=12341234",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
 								"login"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "buyer@columbia.edu"
-								},
-								{
-									"key": "password",
-									"value": "12341234"
-								}
 							]
 						}
 					},
@@ -960,26 +1026,31 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "owner@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{baseUrl}}/user/login?email=owner@columbia.edu&password=12341234",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
 								"login"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "owner@columbia.edu"
-								},
-								{
-									"key": "password",
-									"value": "12341234"
-								}
 							]
 						}
 					},
@@ -1166,26 +1237,31 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "buyer@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{baseUrl}}/user/login?email=buyer@columbia.edu&password=12341234",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
 								"login"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "buyer@columbia.edu"
-								},
-								{
-									"key": "password",
-									"value": "12341234"
-								}
 							]
 						}
 					},

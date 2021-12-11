@@ -1,0 +1,1447 @@
+{
+	"info": {
+		"_postman_id": "c373b651-2328-4f30-aa4e-cee9bc57513b",
+		"name": "system testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Register",
+			"item": [
+				{
+					"name": "register owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "owner@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testtestuser",
+									"type": "text"
+								},
+								{
+									"key": "mobile_phone",
+									"value": "8148888477",
+									"type": "text"
+								},
+								{
+									"key": "zipcode",
+									"value": "10026",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register buyer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "buyer@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testtestuser",
+									"type": "text"
+								},
+								{
+									"key": "mobile_phone",
+									"value": "8148888477",
+									"type": "text"
+								},
+								{
+									"key": "zipcode",
+									"value": "10026",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid register(email format wrong)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"invalid input\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test0columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testtestuser",
+									"type": "text"
+								},
+								{
+									"key": "mobile_phone",
+									"value": "8148888477",
+									"type": "text"
+								},
+								{
+									"key": "zipcode",
+									"value": "10026",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid register(password length)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"invalid input\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test0@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testtestuser",
+									"type": "text"
+								},
+								{
+									"key": "mobile_phone",
+									"value": "8148888477",
+									"type": "text"
+								},
+								{
+									"key": "zipcode",
+									"value": "10026",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalid register(phone length)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"invalid input\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test0@columbia.edu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testtestuser",
+									"type": "text"
+								},
+								{
+									"key": "mobile_phone",
+									"value": "8148888",
+									"type": "text"
+								},
+								{
+									"key": "zipcode",
+									"value": "10026",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Login",
+			"item": [
+				{
+					"name": "Login success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"login successfully\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.error).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/login?email=owner@columbia.edu&password=12341234",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "owner@columbia.edu"
+								},
+								{
+									"key": "password",
+									"value": "12341234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Input",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"invalid input\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.error).to.eql(\"invalid input\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/login?email=zj2304@columbia.edu",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "zj2304@columbia.edu"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No such user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"No such email\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.error).to.eql(\"No such email 2222@columbia.edu\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/login?email=2222@columbia.edu&password=password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "2222@columbia.edu"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"wrong password\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.error).to.eql(\"wrong password owner@columbia.edu\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/login?email=owner@columbia.edu&password=1234666",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "owner@columbia.edu"
+								},
+								{
+									"key": "password",
+									"value": "1234666"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upload Furniture",
+			"item": [
+				{
+					"name": "upload successfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "session",
+								"value": ".eJzVT8tuwzAM-xVD56KQH3LjnPYJuw9FYctykyFdhji5rOi_T8C-YidSIkVQT7i1JfdJOowfTzC7Ajyk93wXOMH7IrmLWda7mb_MvprMrKLZp7mbb_Wc4fo6_ZO760mf3aRPMO7bITrNFUbwzVkqOASbOQtyahUj14pOCUqMgxu4CnpMjdiSItpcAlpfCqbkAnnHumoNL2UIF9W9TRRDJbTkcmXKRAERUwktMMfqMVsNi-iJtP7t6LL9tfn5dB7DG6_L8ShzPks94PULeSWDAA.YbKqRg.IW3AcSDK6bnsRqdvoX_uVnNF9XE; HttpOnly; Path=/",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"mocktitle\",\n    \"labels\": \"mocklabel1, label2\",\n    \"image_url\": \"https://mockurl\",\n    \"description\": \"mockdesc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/furnitures",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "some fields are missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"input invalid.\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "cookie",
+								"value": "user=\"aabb@columbia.edu\"; Path=/",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"mocktitle\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/furnitures",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "field type incorrect",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"input invalid.\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "cookie",
+								"value": "user=\"aabb@columbia.edu\"; Path=/",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": 123,\n    \"labels\": \"mocklabel1, label2\",\n    \"image_url\": \"https://mockurl\",\n    \"description\": \"mockdesc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/furnitures",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get User Profile",
+			"item": [
+				{
+					"name": "get profile successfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search Furniture",
+			"item": [
+				{
+					"name": "Buyer login success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"login successfully\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.error).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/login?email=buyer@columbia.edu&password=12341234",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "buyer@columbia.edu"
+								},
+								{
+									"key": "password",
+									"value": "12341234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search furniture found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"search furniture\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "user=\"aabb@columbia.edu\"; Path=/",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/furniture?keyword=\"mocklabel1\"",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furniture"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "\"mocklabel1\""
+								}
+							]
+						},
+						"description": "Search furniture"
+					},
+					"response": []
+				},
+				{
+					"name": "search furniture not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"search furniture\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"no matched furniture found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furniture?keyword=\"label2\"",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furniture"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "\"label2\""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Buy Furniture",
+			"item": [
+				{
+					"name": "Buy successfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/buy",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"buy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No such furniture",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"furniture not existed\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/-1/buy",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"-1",
+								"buy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Seller Confirm",
+			"item": [
+				{
+					"name": "Not owner confirm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"no owner confirm\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"Only owner can confirm the transaction.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/confirm?confirm=True",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "confirm",
+									"value": "True"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Owner login success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"login successfully\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.error).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/login?email=owner@columbia.edu&password=12341234",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "owner@columbia.edu"
+								},
+								{
+									"key": "password",
+									"value": "12341234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm successfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"confirm successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/confirm?confirm=True",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "confirm",
+									"value": "True"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not pending furniture",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"not pending\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"the owner can only confirm the pending transaction\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/confirm?confirm=True",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "confirm",
+									"value": "True"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No such furniture",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/-1/confirm?confirm=True",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"-1",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "confirm",
+									"value": "True"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rate a transaction",
+			"item": [
+				{
+					"name": "Only buyer can rate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"rating can only be triggered by the buyer\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/rate?rating=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"rate"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buyer login success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"login successfully\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.error).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/login?email=buyer@columbia.edu&password=12341234",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "buyer@columbia.edu"
+								},
+								{
+									"key": "password",
+									"value": "12341234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rate successfully",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/rate?rating=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"rate"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "No such furniture",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"fid not existed\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/-1/rate?rating=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"-1",
+								"rate"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Score out of range",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"rating score should be in the range of [0, 5]\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/rate?rating=6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"rate"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Already rated",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create successfully\", function () {",
+									"    pm.response.to.have.status(400);",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.error).to.eql(\"this transaction has been rated\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/furnitures/1/rate?rating=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"furnitures",
+								"1",
+								"rate"
+							],
+							"query": [
+								{
+									"key": "rating",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"value": "",
+			"disabled": true
+		}
+	]
+}

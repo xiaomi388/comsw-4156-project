@@ -15,6 +15,7 @@ orbs:
   commitlint: conventional-changelog/commitlint@1.0.0
   sonarcloud: sonarsource/sonarcloud@1.0.3
   heroku: circleci/heroku@1.2.6
+  newman: postman/newman@0.0.2
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -95,6 +96,14 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git:
           force: true
+  postman:
+    executor: newman/postman-newman-docker
+    steps:
+      - checkout
+      - newman/newman-run:
+          collection: ./postman_collection.json
+          environment: ./postman_environment.json
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -111,3 +120,6 @@ workflows:
             branches:
               only:
                 - master
+      - postman:
+          requires:
+            - heroku

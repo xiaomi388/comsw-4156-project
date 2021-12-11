@@ -96,7 +96,7 @@ def user_login(raw_form):
     try:
         form = UserLoginForm(raw_form)
         if not form.validate():
-            return json.dumps({"invalid input": form.errors}), 400, None
+            return json.dumps({"error": "invalid input"}), 400, None
         password = hashlib.sha256(
             str(form.password.data).encode('utf-8')).hexdigest()
         email = form.email.data

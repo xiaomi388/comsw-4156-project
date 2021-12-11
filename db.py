@@ -148,11 +148,11 @@ def mock_buy(status):
         cur = conn.cursor()
         cur.execute(
             "UPDATE Furniture "
-            "SET buyer = 'buyer_zj@columbia.edu', status = ? " 
-            "where fid = 1", [status]
+            "SET buyer = ?, status = ? where fid = 1",
+            ['buyer_zj@columbia.edu', status]
         )
         conn.commit()
-        print(f"mock buying behavior")
+        print("mock buying behavior")
     except Error as e:
         print(e)
     return

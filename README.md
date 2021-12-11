@@ -24,6 +24,13 @@ coverage html
 
 The flake8 and coverage reports have been stored in the `report` folder.
 
+## CI Report
+
+ci reports can be found by clicking `details`:
+
+![cireport](cireport.jpg)
+
+
 ## API
 
 ### **POST** - /register

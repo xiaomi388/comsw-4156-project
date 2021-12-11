@@ -162,7 +162,7 @@ def owner_confirm(fid, curr_user_email, is_confirm):
         curr_trans_count = conn.execute(
             "SELECT COUNT(*) FROM Furniture "
             "WHERE status = 'completed' "
-            "and owner = ?",[curr_user_email]
+            "and owner = ?", [curr_user_email]
         ).fetchone()
 
         conn.execute(

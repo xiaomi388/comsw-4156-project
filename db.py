@@ -148,8 +148,7 @@ def mock_buy(status):
         cur = conn.cursor()
         cur.execute(
             "UPDATE Furniture "
-            "SET buyer = 'buyer_zj@columbia.edu', "
-            "status = ? " 
+            "SET buyer = 'buyer_zj@columbia.edu', status = ? " 
             "where fid = 1", [status]
         )
         conn.commit()

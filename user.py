@@ -8,6 +8,7 @@ import userDB
 import sqlite3
 from flask_login import UserMixin
 
+
 class UserRegisterForm(Form):
     email = EmailField('Email',
                        [validators.DataRequired(),
@@ -30,7 +31,6 @@ def register(raw_form):
         return json.dumps({"Input error": form.errors}), 400
 
     hash_object = hashlib.sha256(str(form.password.data).encode('utf-8'))
-    #print('Hashed Password', hash_object.hexdigest())
     user = (form.email.data, hash_object.hexdigest(),
             form.name.data, form.zipcode.data, form.mobile_phone.data)
     conn = None

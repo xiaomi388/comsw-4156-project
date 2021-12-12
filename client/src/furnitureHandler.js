@@ -40,7 +40,7 @@ class FurnitureHandler extends Component {
     render() {
         return (
             <div>
-                <h3>FurnitureHandler</h3> <p>(Cannot upload without login)</p>
+                <h3>Furniture Handler</h3> <p>(Cannot upload without login)</p>
                 <input placeholder="title" onChange={(e) => this.setState({ title: e.target.value })}></input>
                 <input placeholder="labels" onChange={(e) => this.setState({ labels: e.target.value })}></input>
                 <input placeholder="image_url" onChange={(e) => this.setState({ image_url: e.target.value })}></input>

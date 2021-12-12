@@ -11,10 +11,16 @@ from flask_cors import CORS
 db.init_db()
 app = Flask(__name__)
 login_manager = LoginManager()
-login_manager.init_app(app)
 login_manager.login_view = "/user/login"
+login_manager.session_protection = None
 app.secret_key = '4156'
-CORS(app)
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="None"
+)
+CORS(app, supports_credentials=True)
+login_manager.init_app(app)
 
 
 @app.route("/furnitures", methods=["POST"])
@@ -36,6 +42,9 @@ def user_login():
     resp, status_code, user_login_obj = user.user_login(request.form)
     if status_code == 200:
         login_user(user_login_obj)
+        # resp.headers.add("Access-Control-Allow-Headers", "*")
+        # resp.headers.add("Access-Control-Expose-Headers", "*")
+        # resp.headers.add("hello", "1244")
     return resp, status_code
 
 

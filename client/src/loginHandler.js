@@ -14,7 +14,18 @@ class LoginHandler extends Component {
         const loginUrl = `${Constants.BASE_URL}/user/login?email=${email}&password=${password}`;
 
         // Send get request
-        fetch(loginUrl)
+        fetch(loginUrl, {
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': ['GET', 'POST']
+            },
+            body: new URLSearchParams({
+                email: email,
+                password: password
+            }),
+            credentials: "include"
+        })
         .then((res) => res)
         .then((data) => {
             console.log(data);
@@ -33,7 +44,7 @@ class LoginHandler extends Component {
     logout = () => {
         const logoutUrl = `${Constants.BASE_URL}/user/logout`;
         fetch(logoutUrl)
-        .then((res) => res.json()) 
+        .then((res) => res) 
         .then((data) => {
             alert('Logout!');
         })

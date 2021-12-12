@@ -20,17 +20,19 @@ class FurnitureHandler extends Component {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': ['GET', 'POST'],
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 title: title,
                 labels: labels,
                 image_url: image_url,
                 description: description
-            })
+            }),
+            credentials: "include"
         })
         .then(response => response)
         .then((data) => {
-            console.log("post Furniture Data: ", data);
+            console.log("upload furniture data: ", data);
         })
         .catch((err) => console.log(err))
     }

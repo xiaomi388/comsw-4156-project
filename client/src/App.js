@@ -6,6 +6,7 @@ import FurnitureHandler from './furnitureHandler.js';
 import ProfileHandler from './profileHandler.js';
 import LoginHandler from './loginHandler.js';
 import SearchHandler from './searchHandler.js';
+import BuyerHandler from './buyerHandler.js';
 
 
 function App() {
@@ -28,9 +29,10 @@ function App() {
       <SearchHandler />
       <br />
 
-      {/* BuybuybuyHandler
+      <BuyerHandler />
+      <br />
 
-      SellerConfirmHandler
+      {/* SellerConfirmHandler
 
       BuyerRatingHandler */}
 

@@ -19,10 +19,10 @@ class BuyerHandler extends Component {
                 'Access-Control-Allow-Methods': ['GET', 'POST'],
                 'Content-Type': 'application/json'
             },
-            body: ({
+            body: JSON.stringify({
                 fid: fid
             }),
-            // credentials: "include"
+            credentials: "include"
         })
         .then(response => response)
         .then((data) => {

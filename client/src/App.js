@@ -8,6 +8,9 @@ import LoginHandler from './loginHandler.js';
 import SearchHandler from './searchHandler.js';
 import BuyerHandler from './buyerHandler.js';
 
+import RatingHandler from './ratingHandler.js';
+import SellerConfirmHandler from './sellerconfirmHandler.js';
+
 
 function App() {
 
@@ -35,6 +38,12 @@ function App() {
       {/* SellerConfirmHandler
 
       BuyerRatingHandler */}
+
+      <RatingHandler />
+      <br />
+
+      <SellerConfirmHandler />
+      <br />
 
     </div>
   );

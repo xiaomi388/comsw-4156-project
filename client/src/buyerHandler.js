@@ -9,7 +9,9 @@ class BuyerHandler extends Component {
     }
 
     buy = () => {
-        
+        const { fid } = this.state;
+        const buyFurnitureUrl = `${Constants.BASE_URL}/furnitures/${fid}/buy`;
+        // fetch()
     }
 
     render() {
@@ -17,6 +19,7 @@ class BuyerHandler extends Component {
             <div>
                 <h3>
                     This is Buyer handler
+                    <input placeholder="fid" onChange={(e) => this.setState({ fid: e.target.value })} ></input>
                     <button onClick={this.buy}></button>
                 </h3>
             </div>
